@@ -21,27 +21,19 @@ namespace Pocket_Cookbook_Backend.Controllers
             db = context;
         }
 
-        [HttpGet("FillDbTemp")]
-        public void FillInDb()
+        [HttpGet("FillDbCustomQuery")]
+        public async Task<ActionResult<int>> FillDbCustomQuery(string query)
         {
-            Meal m = api.SearchMeals("cuisine=italian&number=3");
+            //query = "cuisine=italian&number=3";
+            Meal m = api.SearchMeals(query);
             m.primary_key_id = 0;
 
-            //foreach (Result r in m.results)
-            //{
-            //    foreach (Meal meal in db.Meals)
-            //    {
-            //        if (meal.results.Any(x => x.id == r.id))
-            //        {
-            //            m.results.Remove(meal.results.Where(y => y.id == r.id).FirstOrDefault());
-            //        }
-            //    }
-            //}
             db.Meals.Add(m);
             db.SaveChanges();
+            return m.primary_key_id;
         }
 
-
+        /*
         // GET: api/Meal
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Meal>>> GetMeals()
@@ -141,5 +133,6 @@ namespace Pocket_Cookbook_Backend.Controllers
         {
             return (db.Meals?.Any(e => e.id == id)).GetValueOrDefault();
         }
+        */
     }
 }
