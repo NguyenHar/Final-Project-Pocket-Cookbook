@@ -24,34 +24,40 @@ namespace Pocket_Cookbook_Backend.Migrations
 
             modelBuilder.Entity("Pocket_Cookbook_Backend.Models.Analyzedinstruction", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("primary_key_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("primary_key_id"));
 
                     b.Property<int>("RecipeFK")
+                        .HasColumnType("int");
+
+                    b.Property<int>("id")
                         .HasColumnType("int");
 
                     b.Property<string>("name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("primary_key_id");
 
                     b.HasIndex("RecipeFK");
 
-                    b.ToTable("Analyzedinstruction");
+                    b.ToTable("analyzedinstructions");
                 });
 
             modelBuilder.Entity("Pocket_Cookbook_Backend.Models.Equipment", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("primary_key_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("primary_key_id"));
 
                     b.Property<int>("StepFK")
+                        .HasColumnType("int");
+
+                    b.Property<int>("id")
                         .HasColumnType("int");
 
                     b.Property<string>("image")
@@ -63,20 +69,20 @@ namespace Pocket_Cookbook_Backend.Migrations
                     b.Property<string>("name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("primary_key_id");
 
                     b.HasIndex("StepFK");
 
-                    b.ToTable("Equipment");
+                    b.ToTable("equipment");
                 });
 
             modelBuilder.Entity("Pocket_Cookbook_Backend.Models.Extendedingredient", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("primary_key_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("primary_key_id"));
 
                     b.Property<int>("RecipeFK")
                         .HasColumnType("int");
@@ -90,10 +96,13 @@ namespace Pocket_Cookbook_Backend.Migrations
                     b.Property<string>("consistency")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("id")
+                        .HasColumnType("int");
+
                     b.Property<string>("image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("measuresid")
+                    b.Property<int?>("measuresprimary_key_id")
                         .HasColumnType("int");
 
                     b.Property<string>("name")
@@ -111,24 +120,27 @@ namespace Pocket_Cookbook_Backend.Migrations
                     b.Property<string>("unit")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("primary_key_id");
 
                     b.HasIndex("RecipeFK");
 
-                    b.HasIndex("measuresid");
+                    b.HasIndex("measuresprimary_key_id");
 
-                    b.ToTable("Extendedingredient");
+                    b.ToTable("extendedingredients");
                 });
 
             modelBuilder.Entity("Pocket_Cookbook_Backend.Models.Ingredient", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("primary_key_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("primary_key_id"));
 
                     b.Property<int>("StepFK")
+                        .HasColumnType("int");
+
+                    b.Property<int>("id")
                         .HasColumnType("int");
 
                     b.Property<string>("image")
@@ -140,20 +152,23 @@ namespace Pocket_Cookbook_Backend.Migrations
                     b.Property<string>("name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("primary_key_id");
 
                     b.HasIndex("StepFK");
 
-                    b.ToTable("Ingredient");
+                    b.ToTable("ingredients");
                 });
 
             modelBuilder.Entity("Pocket_Cookbook_Backend.Models.Meal", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("primary_key_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("primary_key_id"));
+
+                    b.Property<int>("id")
+                        .HasColumnType("int");
 
                     b.Property<int?>("number")
                         .HasColumnType("int");
@@ -164,44 +179,50 @@ namespace Pocket_Cookbook_Backend.Migrations
                     b.Property<int?>("totalResults")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("primary_key_id");
 
                     b.ToTable("Meals");
                 });
 
             modelBuilder.Entity("Pocket_Cookbook_Backend.Models.Measures", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("primary_key_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("primary_key_id"));
 
-                    b.Property<int?>("metricid")
+                    b.Property<int>("id")
                         .HasColumnType("int");
 
-                    b.Property<int?>("usid")
+                    b.Property<int?>("metricprimary_key_id")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.Property<int?>("usprimary_key_id")
+                        .HasColumnType("int");
 
-                    b.HasIndex("metricid");
+                    b.HasKey("primary_key_id");
 
-                    b.HasIndex("usid");
+                    b.HasIndex("metricprimary_key_id");
 
-                    b.ToTable("Measures");
+                    b.HasIndex("usprimary_key_id");
+
+                    b.ToTable("measures");
                 });
 
             modelBuilder.Entity("Pocket_Cookbook_Backend.Models.Metric", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("primary_key_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("primary_key_id"));
 
                     b.Property<float?>("amount")
                         .HasColumnType("real");
+
+                    b.Property<int>("id")
+                        .HasColumnType("int");
 
                     b.Property<string>("unitLong")
                         .HasColumnType("nvarchar(max)");
@@ -209,18 +230,18 @@ namespace Pocket_Cookbook_Backend.Migrations
                     b.Property<string>("unitShort")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("primary_key_id");
 
-                    b.ToTable("Metric");
+                    b.ToTable("units_metric");
                 });
 
             modelBuilder.Entity("Pocket_Cookbook_Backend.Models.Recipe", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("primary_key_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("primary_key_id"));
 
                     b.Property<int?>("aggregateLikes")
                         .HasColumnType("int");
@@ -244,6 +265,9 @@ namespace Pocket_Cookbook_Backend.Migrations
                         .HasColumnType("bit");
 
                     b.Property<int?>("healthScore")
+                        .HasColumnType("int");
+
+                    b.Property<int>("id")
                         .HasColumnType("int");
 
                     b.Property<string>("image")
@@ -303,20 +327,23 @@ namespace Pocket_Cookbook_Backend.Migrations
                     b.Property<int?>("weightWatcherSmartPoints")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("primary_key_id");
 
                     b.ToTable("Recipes");
                 });
 
             modelBuilder.Entity("Pocket_Cookbook_Backend.Models.Result", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("primary_key_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("primary_key_id"));
 
                     b.Property<int?>("Meal")
+                        .HasColumnType("int");
+
+                    b.Property<int>("id")
                         .HasColumnType("int");
 
                     b.Property<string>("image")
@@ -328,25 +355,28 @@ namespace Pocket_Cookbook_Backend.Migrations
                     b.Property<string>("title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("primary_key_id");
 
                     b.HasIndex("Meal");
 
-                    b.ToTable("Result");
+                    b.ToTable("Results");
                 });
 
             modelBuilder.Entity("Pocket_Cookbook_Backend.Models.Step", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("primary_key_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("primary_key_id"));
 
                     b.Property<int>("AnalyzedInstructionFK")
                         .HasColumnType("int");
 
-                    b.Property<int?>("AnalyzedInstructionid")
+                    b.Property<int?>("AnalyzedInstructionprimary_key_id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("id")
                         .HasColumnType("int");
 
                     b.Property<int?>("number")
@@ -355,23 +385,26 @@ namespace Pocket_Cookbook_Backend.Migrations
                     b.Property<string>("step")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("primary_key_id");
 
-                    b.HasIndex("AnalyzedInstructionid");
+                    b.HasIndex("AnalyzedInstructionprimary_key_id");
 
-                    b.ToTable("Step");
+                    b.ToTable("steps");
                 });
 
             modelBuilder.Entity("Pocket_Cookbook_Backend.Models.Us", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("primary_key_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("primary_key_id"));
 
                     b.Property<float?>("amount")
                         .HasColumnType("real");
+
+                    b.Property<int>("id")
+                        .HasColumnType("int");
 
                     b.Property<string>("unitLong")
                         .HasColumnType("nvarchar(max)");
@@ -379,9 +412,9 @@ namespace Pocket_Cookbook_Backend.Migrations
                     b.Property<string>("unitShort")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("primary_key_id");
 
-                    b.ToTable("Us");
+                    b.ToTable("units_us");
                 });
 
             modelBuilder.Entity("Pocket_Cookbook_Backend.Models.Analyzedinstruction", b =>
@@ -416,7 +449,7 @@ namespace Pocket_Cookbook_Backend.Migrations
 
                     b.HasOne("Pocket_Cookbook_Backend.Models.Measures", "measures")
                         .WithMany()
-                        .HasForeignKey("measuresid");
+                        .HasForeignKey("measuresprimary_key_id");
 
                     b.Navigation("Recipe");
 
@@ -438,11 +471,11 @@ namespace Pocket_Cookbook_Backend.Migrations
                 {
                     b.HasOne("Pocket_Cookbook_Backend.Models.Metric", "metric")
                         .WithMany()
-                        .HasForeignKey("metricid");
+                        .HasForeignKey("metricprimary_key_id");
 
                     b.HasOne("Pocket_Cookbook_Backend.Models.Us", "us")
                         .WithMany()
-                        .HasForeignKey("usid");
+                        .HasForeignKey("usprimary_key_id");
 
                     b.Navigation("metric");
 
@@ -462,7 +495,7 @@ namespace Pocket_Cookbook_Backend.Migrations
                 {
                     b.HasOne("Pocket_Cookbook_Backend.Models.Analyzedinstruction", "AnalyzedInstruction")
                         .WithMany("steps")
-                        .HasForeignKey("AnalyzedInstructionid");
+                        .HasForeignKey("AnalyzedInstructionprimary_key_id");
 
                     b.Navigation("AnalyzedInstruction");
                 });

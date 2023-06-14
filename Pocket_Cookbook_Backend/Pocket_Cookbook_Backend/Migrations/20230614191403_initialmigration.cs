@@ -14,38 +14,25 @@ namespace Pocket_Cookbook_Backend.Migrations
                 name: "Meals",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    primary_key_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    id = table.Column<int>(type: "int", nullable: false),
                     offset = table.Column<int>(type: "int", nullable: true),
                     number = table.Column<int>(type: "int", nullable: true),
                     totalResults = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Meals", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Metric",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    amount = table.Column<float>(type: "real", nullable: true),
-                    unitShort = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    unitLong = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Metric", x => x.id);
+                    table.PrimaryKey("PK_Meals", x => x.primary_key_id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Recipes",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    primary_key_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    id = table.Column<int>(type: "int", nullable: false),
                     vegetarian = table.Column<bool>(type: "bit", nullable: true),
                     vegan = table.Column<bool>(type: "bit", nullable: true),
                     glutenFree = table.Column<bool>(type: "bit", nullable: true),
@@ -76,30 +63,48 @@ namespace Pocket_Cookbook_Backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Recipes", x => x.id);
+                    table.PrimaryKey("PK_Recipes", x => x.primary_key_id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Us",
+                name: "units_metric",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    primary_key_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    id = table.Column<int>(type: "int", nullable: false),
                     amount = table.Column<float>(type: "real", nullable: true),
                     unitShort = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     unitLong = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Us", x => x.id);
+                    table.PrimaryKey("PK_units_metric", x => x.primary_key_id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Result",
+                name: "units_us",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    primary_key_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    id = table.Column<int>(type: "int", nullable: false),
+                    amount = table.Column<float>(type: "real", nullable: true),
+                    unitShort = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    unitLong = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_units_us", x => x.primary_key_id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Results",
+                columns: table => new
+                {
+                    primary_key_id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    id = table.Column<int>(type: "int", nullable: false),
                     title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     imageType = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -107,85 +112,89 @@ namespace Pocket_Cookbook_Backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Result", x => x.id);
+                    table.PrimaryKey("PK_Results", x => x.primary_key_id);
                     table.ForeignKey(
-                        name: "FK_Result_Meals_Meal",
+                        name: "FK_Results_Meals_Meal",
                         column: x => x.Meal,
                         principalTable: "Meals",
-                        principalColumn: "id");
+                        principalColumn: "primary_key_id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Analyzedinstruction",
+                name: "analyzedinstructions",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    primary_key_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    id = table.Column<int>(type: "int", nullable: false),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RecipeFK = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Analyzedinstruction", x => x.id);
+                    table.PrimaryKey("PK_analyzedinstructions", x => x.primary_key_id);
                     table.ForeignKey(
-                        name: "FK_Analyzedinstruction_Recipes_RecipeFK",
+                        name: "FK_analyzedinstructions_Recipes_RecipeFK",
                         column: x => x.RecipeFK,
                         principalTable: "Recipes",
-                        principalColumn: "id",
+                        principalColumn: "primary_key_id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Measures",
+                name: "measures",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    primary_key_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    usid = table.Column<int>(type: "int", nullable: true),
-                    metricid = table.Column<int>(type: "int", nullable: true)
+                    id = table.Column<int>(type: "int", nullable: false),
+                    usprimary_key_id = table.Column<int>(type: "int", nullable: true),
+                    metricprimary_key_id = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Measures", x => x.id);
+                    table.PrimaryKey("PK_measures", x => x.primary_key_id);
                     table.ForeignKey(
-                        name: "FK_Measures_Metric_metricid",
-                        column: x => x.metricid,
-                        principalTable: "Metric",
-                        principalColumn: "id");
+                        name: "FK_measures_units_metric_metricprimary_key_id",
+                        column: x => x.metricprimary_key_id,
+                        principalTable: "units_metric",
+                        principalColumn: "primary_key_id");
                     table.ForeignKey(
-                        name: "FK_Measures_Us_usid",
-                        column: x => x.usid,
-                        principalTable: "Us",
-                        principalColumn: "id");
+                        name: "FK_measures_units_us_usprimary_key_id",
+                        column: x => x.usprimary_key_id,
+                        principalTable: "units_us",
+                        principalColumn: "primary_key_id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Step",
+                name: "steps",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    primary_key_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    id = table.Column<int>(type: "int", nullable: false),
                     number = table.Column<int>(type: "int", nullable: true),
                     step = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AnalyzedInstructionid = table.Column<int>(type: "int", nullable: true),
+                    AnalyzedInstructionprimary_key_id = table.Column<int>(type: "int", nullable: true),
                     AnalyzedInstructionFK = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Step", x => x.id);
+                    table.PrimaryKey("PK_steps", x => x.primary_key_id);
                     table.ForeignKey(
-                        name: "FK_Step_Analyzedinstruction_AnalyzedInstructionid",
-                        column: x => x.AnalyzedInstructionid,
-                        principalTable: "Analyzedinstruction",
-                        principalColumn: "id");
+                        name: "FK_steps_analyzedinstructions_AnalyzedInstructionprimary_key_id",
+                        column: x => x.AnalyzedInstructionprimary_key_id,
+                        principalTable: "analyzedinstructions",
+                        principalColumn: "primary_key_id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Extendedingredient",
+                name: "extendedingredients",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    primary_key_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    id = table.Column<int>(type: "int", nullable: false),
                     aisle = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     consistency = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -195,31 +204,32 @@ namespace Pocket_Cookbook_Backend.Migrations
                     originalName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     amount = table.Column<float>(type: "real", nullable: true),
                     unit = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    measuresid = table.Column<int>(type: "int", nullable: true),
+                    measuresprimary_key_id = table.Column<int>(type: "int", nullable: true),
                     RecipeFK = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Extendedingredient", x => x.id);
+                    table.PrimaryKey("PK_extendedingredients", x => x.primary_key_id);
                     table.ForeignKey(
-                        name: "FK_Extendedingredient_Measures_measuresid",
-                        column: x => x.measuresid,
-                        principalTable: "Measures",
-                        principalColumn: "id");
-                    table.ForeignKey(
-                        name: "FK_Extendedingredient_Recipes_RecipeFK",
+                        name: "FK_extendedingredients_Recipes_RecipeFK",
                         column: x => x.RecipeFK,
                         principalTable: "Recipes",
-                        principalColumn: "id",
+                        principalColumn: "primary_key_id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_extendedingredients_measures_measuresprimary_key_id",
+                        column: x => x.measuresprimary_key_id,
+                        principalTable: "measures",
+                        principalColumn: "primary_key_id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Equipment",
+                name: "equipment",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    primary_key_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    id = table.Column<int>(type: "int", nullable: false),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     localizedName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     image = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -227,21 +237,22 @@ namespace Pocket_Cookbook_Backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Equipment", x => x.id);
+                    table.PrimaryKey("PK_equipment", x => x.primary_key_id);
                     table.ForeignKey(
-                        name: "FK_Equipment_Step_StepFK",
+                        name: "FK_equipment_steps_StepFK",
                         column: x => x.StepFK,
-                        principalTable: "Step",
-                        principalColumn: "id",
+                        principalTable: "steps",
+                        principalColumn: "primary_key_id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ingredient",
+                name: "ingredients",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    primary_key_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    id = table.Column<int>(type: "int", nullable: false),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     localizedName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     image = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -249,93 +260,93 @@ namespace Pocket_Cookbook_Backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ingredient", x => x.id);
+                    table.PrimaryKey("PK_ingredients", x => x.primary_key_id);
                     table.ForeignKey(
-                        name: "FK_Ingredient_Step_StepFK",
+                        name: "FK_ingredients_steps_StepFK",
                         column: x => x.StepFK,
-                        principalTable: "Step",
-                        principalColumn: "id",
+                        principalTable: "steps",
+                        principalColumn: "primary_key_id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Analyzedinstruction_RecipeFK",
-                table: "Analyzedinstruction",
+                name: "IX_analyzedinstructions_RecipeFK",
+                table: "analyzedinstructions",
                 column: "RecipeFK");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Equipment_StepFK",
-                table: "Equipment",
+                name: "IX_equipment_StepFK",
+                table: "equipment",
                 column: "StepFK");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Extendedingredient_measuresid",
-                table: "Extendedingredient",
-                column: "measuresid");
+                name: "IX_extendedingredients_measuresprimary_key_id",
+                table: "extendedingredients",
+                column: "measuresprimary_key_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Extendedingredient_RecipeFK",
-                table: "Extendedingredient",
+                name: "IX_extendedingredients_RecipeFK",
+                table: "extendedingredients",
                 column: "RecipeFK");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ingredient_StepFK",
-                table: "Ingredient",
+                name: "IX_ingredients_StepFK",
+                table: "ingredients",
                 column: "StepFK");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Measures_metricid",
-                table: "Measures",
-                column: "metricid");
+                name: "IX_measures_metricprimary_key_id",
+                table: "measures",
+                column: "metricprimary_key_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Measures_usid",
-                table: "Measures",
-                column: "usid");
+                name: "IX_measures_usprimary_key_id",
+                table: "measures",
+                column: "usprimary_key_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Result_Meal",
-                table: "Result",
+                name: "IX_Results_Meal",
+                table: "Results",
                 column: "Meal");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Step_AnalyzedInstructionid",
-                table: "Step",
-                column: "AnalyzedInstructionid");
+                name: "IX_steps_AnalyzedInstructionprimary_key_id",
+                table: "steps",
+                column: "AnalyzedInstructionprimary_key_id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Equipment");
+                name: "equipment");
 
             migrationBuilder.DropTable(
-                name: "Extendedingredient");
+                name: "extendedingredients");
 
             migrationBuilder.DropTable(
-                name: "Ingredient");
+                name: "ingredients");
 
             migrationBuilder.DropTable(
-                name: "Result");
+                name: "Results");
 
             migrationBuilder.DropTable(
-                name: "Measures");
+                name: "measures");
 
             migrationBuilder.DropTable(
-                name: "Step");
+                name: "steps");
 
             migrationBuilder.DropTable(
                 name: "Meals");
 
             migrationBuilder.DropTable(
-                name: "Metric");
+                name: "units_metric");
 
             migrationBuilder.DropTable(
-                name: "Us");
+                name: "units_us");
 
             migrationBuilder.DropTable(
-                name: "Analyzedinstruction");
+                name: "analyzedinstructions");
 
             migrationBuilder.DropTable(
                 name: "Recipes");

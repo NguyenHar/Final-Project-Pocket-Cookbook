@@ -1,3 +1,5 @@
+using Pocket_Cookbook_Backend.Models;
+
 namespace Pocket_Cookbook_Backend
 {
     public class Program
@@ -5,6 +7,7 @@ namespace Pocket_Cookbook_Backend
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddDbContext<CookbookContext>();
 
             // Add services to the container.
 

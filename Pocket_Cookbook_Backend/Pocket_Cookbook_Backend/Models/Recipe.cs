@@ -6,6 +6,7 @@ namespace Pocket_Cookbook_Backend.Models
     public class Recipe
     {
         [Key]
+        public int primary_key_id { get; set; }
         public int id { get; set; }
         public bool? vegetarian { get; set; }
         public bool? vegan { get; set; }
@@ -54,6 +55,7 @@ namespace Pocket_Cookbook_Backend.Models
     public class Extendedingredient
     {
         [Key]
+        public int primary_key_id { get; set; }
         public int id { get; set; }
         public string? aisle { get; set; }
         public string? image { get; set; }
@@ -73,6 +75,7 @@ namespace Pocket_Cookbook_Backend.Models
     public class Analyzedinstruction
     {
         [Key]
+        public int primary_key_id { get; set; }
         public int id { get; set; }
         public string? name { get; set; }
         public virtual ICollection<Step>? steps { get; set; } = new List<Step>();
@@ -84,6 +87,7 @@ namespace Pocket_Cookbook_Backend.Models
     public class Measures
     {
         [Key]
+        public int primary_key_id { get; set; }
         public int id { get; set; }    
         public Us? us { get; set; }
         public Metric? metric { get; set; }
@@ -92,6 +96,7 @@ namespace Pocket_Cookbook_Backend.Models
     public class Us
     {
         [Key]
+        public int primary_key_id { get; set; }
         public int id { get; set; }
         public float? amount { get; set; }
         public string? unitShort { get; set; }
@@ -101,6 +106,7 @@ namespace Pocket_Cookbook_Backend.Models
     public class Metric
     {
         [Key]
+        public int primary_key_id { get; set; }
         public int id { get; set; }
         public float? amount { get; set; }
         public string? unitShort { get; set; }
@@ -111,6 +117,7 @@ namespace Pocket_Cookbook_Backend.Models
     public class Step
     {
         [Key]
+        public int primary_key_id { get; set; }
         public int id { get; set; }
         public int? number { get; set; }
         public string? step { get; set; }
@@ -124,6 +131,7 @@ namespace Pocket_Cookbook_Backend.Models
     public class Ingredient
     {
         [Key]
+        public int primary_key_id { get; set; }
         public int id { get; set; }
         public string? name { get; set; }
         public string? localizedName { get; set; }
@@ -136,6 +144,7 @@ namespace Pocket_Cookbook_Backend.Models
     public class Equipment
     {
         [Key]
+        public int primary_key_id { get; set; }
         public int id { get; set; }
         public string? name { get; set; }
         public string? localizedName { get; set; }
