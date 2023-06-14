@@ -6,6 +6,7 @@ namespace Pocket_Cookbook_Backend.Models
     public class Meal
     {
         [Key]
+        public int primary_key_id { get; set; }
         public int id { get; set; }
         public virtual ICollection<Result>? results { get; set; } = new List<Result>();
         public int? offset { get; set; }
@@ -16,6 +17,7 @@ namespace Pocket_Cookbook_Backend.Models
     public class Result
     {
         [Key]
+        public int primary_key_id { get; set; }
         public int id { get; set; }
         public string? title { get; set; }
         public string? image { get; set; }
