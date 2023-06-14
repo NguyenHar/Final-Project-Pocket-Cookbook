@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol;
 using Pocket_Cookbook_Backend.Models;
 
 namespace Pocket_Cookbook_Backend.Controllers
@@ -32,6 +33,48 @@ namespace Pocket_Cookbook_Backend.Controllers
             db.SaveChanges();
             return m.primary_key_id;
         }
+
+        [HttpGet("DummyQuery")]
+        public Meal DummyQuery(string query)
+        {
+            return api.SearchMeals(query);
+        }
+
+        [HttpDelete("DeleteMealById")]
+        public async Task<IActionResult> DeleteMealById(int id)
+        {
+            List<Result> result = db.Results.Where(x => x.meal.primary_key_id == id).ToList();
+            foreach (Result r in result)
+            {
+                db.Results.Remove(r);
+            }
+            Meal mealResult = db.Meals.Find(id);
+            db.Meals.Remove(mealResult);
+            db.SaveChanges();
+            return NoContent();
+        }
+
+
+        // Purge the entire database of meal & result entries
+        [HttpDelete("DeleteEveryMeal")]
+        public async Task<IActionResult> DeleteEveryMeal()
+        {
+            List<Result> result = db.Results.ToList();
+            foreach (Result r in result)
+            {
+                db.Results.Remove(r);
+            }
+            List<Meal> meal = db.Meals.ToList();
+            foreach (Meal m in meal)
+            {
+                db.Meals.Remove(m);
+            }
+            db.SaveChanges();
+
+            return NoContent();
+        }
+
+
 
         /*
         // GET: api/Meal

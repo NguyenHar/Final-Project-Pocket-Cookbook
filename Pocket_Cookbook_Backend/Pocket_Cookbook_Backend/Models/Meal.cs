@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Pocket_Cookbook_Backend.Models
 {
+    // Object containing the entire api call
     public class Meal
     {
         [Key]
@@ -14,6 +15,7 @@ namespace Pocket_Cookbook_Backend.Models
         public int? totalResults { get; set; }
     }
 
+    // This is the actual Meal
     public class Result
     {
         [Key]
