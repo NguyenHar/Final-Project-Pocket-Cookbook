@@ -8,11 +8,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class MealService {
 
-  url:string = "https://localhost:7270/api/Meal/"
+  url:string = "https://localhost:7270/api/Meal/";
   constructor(private http:HttpClient) { }
-
+  //https://localhost:7270/api/Meal/MealCustomQueryReturnPKId?query=query%3Drice%26number%3D2
   getMeals(query:string):Observable<Result[]>{
-    return this.http.get<Result[]>(this.url + "RetrieveResults?query=query%3D" + query);
+    return this.http.get<Result[]>(this.url + 'MealCustomQueryReturnResults?' + "query=" + query + "&maxReadyTime=20");
   }
 
   
