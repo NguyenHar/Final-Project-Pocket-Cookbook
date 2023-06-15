@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MealService } from '../meal.service';
+import { Result } from '../meal';
 
 @Component({
   selector: 'app-meal',
@@ -9,12 +10,12 @@ import { MealService } from '../meal.service';
 export class MealComponent {
 
   query:string="";
-  mealId:number = 0;
+  resultsList:Result[] = [];
 
   constructor (private mealService:MealService){
     this.mealService.getMeals(this.query).subscribe(
       (result)=> {
-        this.mealId = result;
+        this.resultsList = result;
       }
     )
   }

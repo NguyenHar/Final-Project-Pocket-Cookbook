@@ -11,12 +11,8 @@ export class MealService {
   url:string = "https://localhost:7270/api/Meal/"
   constructor(private http:HttpClient) { }
 
-  getMeals(query:string):Observable<number>{
-    return this.http.get<number>(this.url + "FillDbCustomQuery");
-  }
-
-  getResults(id:number):Observable<Result[]>{
-    return this.http.get<Result[]>(this.url + "RetrieveCustomQueryResults?id=" + id)
+  getMeals(query:string):Observable<Result[]>{
+    return this.http.get<Result[]>(this.url + "RetrieveResults?query=query%3D" + query);
   }
 
   
