@@ -12,8 +12,8 @@ using Pocket_Cookbook_Backend.Models;
 namespace Pocket_Cookbook_Backend.Migrations
 {
     [DbContext(typeof(CookbookContext))]
-    [Migration("20230614191403_initialmigration")]
-    partial class initialmigration
+    [Migration("20230615131517_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
