@@ -1,2 +1,8 @@
 <p>What would you like to eat?</p>
 <input type="text" [(ngModel)]="query"/>
+<input type="submit">
+
+<div *ngFor="let r of resultsList" >
+    <p>{{r.title}}</p>
+    <img src="{{r.image}}"/>
+</div>

@@ -19,7 +19,26 @@ namespace Pocket_Cookbook_Backend
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAngularOrigins",
+                builder =>
+                {
+                    builder.WithOrigins(
+                                        "http://localhost:4200"
+                                        )
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod();
+                });
+            });
+
+            // UseCors
+
+
             var app = builder.Build();
+            app.UseCors("AllowAngularOrigins");
+            //var cors = require('cors');
+            //app.use(cors());
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
