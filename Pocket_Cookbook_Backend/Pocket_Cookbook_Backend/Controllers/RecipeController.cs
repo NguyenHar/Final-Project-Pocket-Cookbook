@@ -21,6 +21,33 @@ namespace Pocket_Cookbook_Backend.Controllers
             db = context;
         }
 
+        // Gets information about a single recipe
+        // Syntax: id
+        // Return single recipe object
+        [HttpGet("GetRecipeInfo")]
+        public async Task<ActionResult<Recipe>> GetRecipeInfo(int id)
+        {
+            Recipe r = api.GetRecipeInfo(id);
+            r.primary_key_id = 0;
+            db.Recipes.Add(r);
+            db.SaveChanges();
+            return Ok(r);
+        }
+        // Gets information about many recipes, comma separated id's
+        // Syntax: id,id2,id3,id4
+        // Return list of recipes from the endpoint
+        [HttpGet("GetRecipeInfoBulk")]
+        public async Task<ActionResult<List<Recipe>>> GetRecipeInfoBulk(string ids)
+        {
+            List<Recipe> r = api.GetRecipeInfoBulk(ids);
+            foreach (Recipe recipe in r)
+            {
+                recipe.primary_key_id = 0;
+                db.Recipes.Add(recipe);
+            }
+            db.SaveChanges();
+            return Ok(r);
+        }
 
 
         /*

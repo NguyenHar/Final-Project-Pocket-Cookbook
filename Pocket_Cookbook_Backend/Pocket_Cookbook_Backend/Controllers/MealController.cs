@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -26,7 +27,7 @@ namespace Pocket_Cookbook_Backend.Controllers
         // Syntax: param=value&param2=value2&param3=value3
         // See https://spoonacular.com/food-api/docs
         // Returns: Primary key of meal
-        [HttpGet("FillDbCustomQuery")]
+        [HttpGet("MealCustomQueryReturnPKId")]
         public async Task<ActionResult<int>> FillDbCustomQuery(string query)
         {
             //query = "cuisine=italian&number=3";
@@ -40,11 +41,34 @@ namespace Pocket_Cookbook_Backend.Controllers
 
         // Uses the Id from FillDbCustomQuery() to search the db
         // Returns: List of results matching the meal id
-        [HttpGet("RetrieveCustomQueryResults")]
-        public async Task<ActionResult<IEnumerable<Result>>> RetrieveDbCustomQuery(int id)
+        [HttpGet("RetrieveResultsByMealId")]
+        public async Task<ActionResult<IEnumerable<Result>>> RetrieveResultsById(int id)
         {
             List<Result> result = db.Results.Where(x => x.meal.primary_key_id == id).ToList();
             return result;
+        }
+
+        // Does FillDbCustomQuery() and RetrieveResultsById() in a single function
+        // Add entries to the database based on a specified query
+        // Syntax: param=value&param2=value2&param3=value3
+        // Returns: List of results
+        [HttpGet("RetrieveResults")]
+        public async Task<ActionResult<IEnumerable<Result>>> RetrieveResults(string query)
+        {
+            Meal m = api.SearchMeals(query);
+            m.primary_key_id = 0;
+            db.Meals.Add(m);
+            db.SaveChanges();
+            int mealPk = db.Meals.OrderBy(x => x.primary_key_id).Last().primary_key_id;
+
+            List<Result> returnList = new List<Result>();
+
+            foreach (Result results in db.Meals.OrderBy(x => x.primary_key_id).Last().results.ToList())
+            {
+                results.meal = null;
+                returnList.Add(results);
+            }
+            return returnList;
         }
 
         // Used for testing purposes
