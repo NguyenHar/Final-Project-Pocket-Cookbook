@@ -12,7 +12,7 @@ using Pocket_Cookbook_Backend.Models;
 namespace Pocket_Cookbook_Backend.Migrations
 {
     [DbContext(typeof(CookbookContext))]
-    [Migration("20230615122204_Init")]
+    [Migration("20230615131517_Init")]
     partial class Init
     {
         /// <inheritdoc />
