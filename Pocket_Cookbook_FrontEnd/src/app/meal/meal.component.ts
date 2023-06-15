@@ -13,7 +13,7 @@ export class MealComponent {
   resultsList:Result[] = [];
 
   constructor (private mealService:MealService){
-    this.getMealsByQuery();
+    
   }
 
   getMealsByQuery():void{
