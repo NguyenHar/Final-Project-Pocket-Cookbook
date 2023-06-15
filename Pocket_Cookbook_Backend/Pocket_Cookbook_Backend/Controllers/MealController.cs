@@ -28,7 +28,7 @@ namespace Pocket_Cookbook_Backend.Controllers
         // See https://spoonacular.com/food-api/docs
         // Returns: Primary key of meal
         [HttpGet("MealCustomQueryReturnPKId")]
-        public async Task<ActionResult<int>> FillDbCustomQuery(string query)
+        public async Task<ActionResult<int>> MealCustomQueryPKId(string query)
         {
             //query = "cuisine=italian&number=3";
             Meal m = api.SearchMeals(query);
@@ -52,8 +52,8 @@ namespace Pocket_Cookbook_Backend.Controllers
         // Add entries to the database based on a specified query
         // Syntax: param=value&param2=value2&param3=value3
         // Returns: List of results
-        [HttpGet("RetrieveResults")]
-        public async Task<ActionResult<IEnumerable<Result>>> RetrieveResults(string query)
+        [HttpGet("MealCustomQueryReturnResults")]
+        public async Task<ActionResult<IEnumerable<Result>>> MealCustomQueryResults(string query)
         {
             Meal m = api.SearchMeals(query);
             m.primary_key_id = 0;
