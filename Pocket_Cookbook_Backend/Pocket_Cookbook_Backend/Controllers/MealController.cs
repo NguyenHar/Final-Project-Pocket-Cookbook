@@ -22,6 +22,10 @@ namespace Pocket_Cookbook_Backend.Controllers
             db = context;
         }
 
+        // Add entries to the database based on a specified query
+        // Syntax: param=value&param2=value2&param3=value3
+        // See https://spoonacular.com/food-api/docs
+        // Returns: Primary key of meal
         [HttpGet("FillDbCustomQuery")]
         public async Task<ActionResult<int>> FillDbCustomQuery(string query)
         {
@@ -34,12 +38,25 @@ namespace Pocket_Cookbook_Backend.Controllers
             return m.primary_key_id;
         }
 
+        // Uses the Id from FillDbCustomQuery() to search the db
+        // Returns: List of results matching the meal id
+        [HttpGet("RetrieveCustomQueryResults")]
+        public async Task<ActionResult<IEnumerable<Result>>> RetrieveDbCustomQuery(int id)
+        {
+            List<Result> result = db.Results.Where(x => x.meal.primary_key_id == id).ToList();
+            return result;
+        }
+
+        // Used for testing purposes
         [HttpGet("DummyQuery")]
         public Meal DummyQuery(string query)
         {
             return api.SearchMeals(query);
         }
 
+        // Searches the database for the meal object by id
+        // First delete all of its associated results by foreign key
+        // Then delete the meal
         [HttpDelete("DeleteMealById")]
         public async Task<IActionResult> DeleteMealById(int id)
         {
