@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Meal } from './meal';
+import { Meal, Result } from './meal';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -8,10 +8,16 @@ import { HttpClient } from '@angular/common/http';
 })
 export class MealService {
 
-  url:string = "https://localhost:7270/api/Meal/FillDbCustomQuery"
+  url:string = "https://localhost:7270/api/Meal/"
   constructor(private http:HttpClient) { }
 
-  getAllOrders():Observable<any>{
-    return this.http.get<Meal[]>(this.url);
+  getMeals(query:string):Observable<number>{
+    return this.http.get<number>(this.url + "FillDbCustomQuery");
   }
+
+  getResults(id:number):Observable<Result[]>{
+    return this.http.get<Result[]>(this.url + "RetrieveCustomQueryResults?id=" + id)
+  }
+
+  
 }
