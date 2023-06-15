@@ -13,6 +13,11 @@ export class MealComponent {
   resultsList:Result[] = [];
 
   constructor (private mealService:MealService){
+    this.getMealsByQuery();
+  }
+
+  getMealsByQuery():void{
+    let searchQuery = this.query;
     this.mealService.getMeals(this.query).subscribe(
       (result)=> {
         this.resultsList = result;

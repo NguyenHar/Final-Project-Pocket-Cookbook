@@ -1,6 +1,6 @@
 <p>What would you like to eat?</p>
 <input type="text" [(ngModel)]="query"/>
-<input type="submit">
+<button (click)="getMealsByQuery()">Search</button>
 
 <div *ngFor="let r of resultsList" >
     <p>{{r.title}}</p>
