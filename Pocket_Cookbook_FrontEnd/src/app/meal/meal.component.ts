@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 export class MealComponent {
 
   query:string="";
-  time:number= 30;
   resultsList:Result[] = [];
 
 
@@ -30,7 +29,6 @@ export class MealComponent {
   ngOnInit() {
     this.resultsList = this.mealService.searchResults;
   }
-
 
   // Calls spoonacular API to return a list of meal results
   // Uses user input as the query
