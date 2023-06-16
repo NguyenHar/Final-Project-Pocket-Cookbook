@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol;
 using Pocket_Cookbook_Backend.Models;
+using static System.Net.WebRequestMethods;
 
 namespace Pocket_Cookbook_Backend.Controllers
 {
@@ -66,6 +67,8 @@ namespace Pocket_Cookbook_Backend.Controllers
             foreach (Result results in db.Meals.OrderBy(x => x.primary_key_id).Last().results.ToList())
             {
                 results.meal = null;
+                if (results.image == "https://spoonacular.com/recipeImages/606953-312x231.jpg")
+                    continue;
                 returnList.Add(results);
             }
             return returnList;

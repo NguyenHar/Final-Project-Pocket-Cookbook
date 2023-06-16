@@ -1,1 +1,17 @@
 <p>Welcome to the recipe page!</p>
+
+<h3>{{dummyRecipe.title}}</h3>
+<img src="{{dummyRecipe.image}}">
+
+
+<div *ngIf="dummyRecipe.cookingMinutes != -1">
+    <p>Prep time: {{dummyRecipe.preparationMinutes}}</p>
+    <p>Cook time: {{dummyRecipe.cookingMinutes}}</p>
+</div>
+
+
+
+<div>
+
+    <p>Ready in: {{dummyRecipe.readyInMinutes}} minutes!</p>
+</div>
