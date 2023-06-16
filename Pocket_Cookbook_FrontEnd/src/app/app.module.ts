@@ -16,7 +16,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 
 const routes : Route[] = [
   { path:'' , component:MealComponent, pathMatch: 'full' },
-  { path:'favorites', component:FavoritesComponent}
+  { path:'favorites', component:FavoritesComponent},
+  { path:'recipe', component:RecipeComponent}
 ];
 
 @NgModule({
