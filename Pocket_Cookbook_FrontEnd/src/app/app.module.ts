@@ -8,6 +8,11 @@ import { Route, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { RecipeComponent } from './recipe/recipe.component';
 import { FavoritesComponent } from './favorites/favorites.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from "@angular/material/card";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatButtonModule } from "@angular/material/button";
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 const routes : Route[] = [
   { path:'' , component:MealComponent, pathMatch: 'full' },
@@ -25,7 +30,12 @@ const routes : Route[] = [
     BrowserModule, 
     RouterModule.forRoot(routes),
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatButtonModule,
+    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

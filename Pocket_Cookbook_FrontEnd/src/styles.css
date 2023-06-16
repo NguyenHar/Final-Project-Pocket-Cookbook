@@ -38,9 +38,15 @@
     text-align: center;
 }
 
-body {
+html {
+  background: linear-gradient(to right, #40d06b, #80b614);
+}
+
+/* body {
     Font-family: Open Sans; 
     Font-weight: 300; 
     font-size: larger;
     background: linear-gradient(to right, #40d06b, #80b614);
-}
+} */
+
+

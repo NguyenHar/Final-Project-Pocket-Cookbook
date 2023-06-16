@@ -2,7 +2,60 @@
 <input type="text" [(ngModel)]="query"/>
 <button (click)="getMealsByQuery()">Search</button>
 
-<div *ngFor="let r of resultsList" >
+<div class="content">
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div 
+        fxFlex="25%"
+        fxFlex.xs="100%"
+        fxFlex.sm="33%" *ngFor="let r of resultsList">
+            <mat-card class="mat-elevation-z4" style="background-color: aliceblue;">
+            <!-- <mat-card-header>
+                <mat-card-title>{{r.title}}</mat-card-title>
+            </mat-card-header> -->
+          <img mat-card-image src="{{r.image}}"/>
+          <mat-card-content>
+            <p>{{r.title}}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button style=
+            "background-color:blue; color:white"> View Recipe </button>
+            <button mat-button style=
+            "background-color:green; color:white"> Save For Later </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+</div>
+
+<!-- <div *ngFor="let r of resultsList" >
     <p>{{r.title}}</p>
     <img src="{{r.image}}"/>
-</div>
+</div>   -->
+
+<!-- <div class="card-data">
+    <div class="col-md-4 px-10" *ngFor="let r of resultsList">
+<div class="card">
+    <img class="card-img-top" src="{{r.image}}" alt="Card image">
+    <div class="card-body">
+      <h4 class="card-title">John Doe</h4>
+      <a href="#" class="btn btn-primary">See Profile</a>
+    </div>
+    </div>
+  </div>
+</div> -->
+
+
+<!-- <div class="container">
+
+        <div class="card-data">
+            <div class="col-md-4 px-10" *ngFor="let r of resultsList">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{r.image}}" class="img-fluid">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                </div>
+          </div>
+        </div>
+      </div>
+
+  </div> -->
