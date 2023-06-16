@@ -11,10 +11,8 @@ export class MealService {
   url:string = "https://localhost:7270/api/Meal/";
   // Meal result selected by button on the home page, to be displayed on recipes page
   selectedMeal:Result = {} as Result; 
-
   // List of favorited meal results to be displayed on favorites page
   favoritedMeals:Result[] = [];
-
   // List of meal results from the user's search
   searchResults:Result[] = [];
 

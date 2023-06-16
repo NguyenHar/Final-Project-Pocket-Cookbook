@@ -17,6 +17,15 @@ export class MealComponent {
   resultsList:Result[] = [];
 
 
+  /* Much later todo to preserve API calls
+    Store user inputs into a dictionary/hash map, key=query, value=meal id
+    If the meal type has already been searched for, simply retrieve the meal from the database
+    Otherwise, call the API and store new results inside dictionary and the database
+  */
+
+
+
+
   // Hard codes to grab from the sql database on refresh
   // So i'm not spending api calls every time the page is loaded
   constructor (private mealService:MealService, private router:Router) {
@@ -25,6 +34,10 @@ export class MealComponent {
       (result) => {
         this.mealService.searchResults = result;
         this.resultsList = result;
+        /* Removed for now, filtering is done in backend
+        this.filterNonImageResults(this.mealService.searchResults);
+        this.filterNonImageResults(this.resultsList);*/
+
       }
     )
   }
@@ -64,6 +77,17 @@ export class MealComponent {
     }
     return false;
   }
+
+  /* Removed for now, filter is happening in the backend
+  // Remove results where the image is a placeholder
+  filterNonImageResults(list:Result[]) : void {
+    for (let i=0; i<list.length; i++)
+    if (list[i].image == "https://spoonacular.com/recipeImages/606953-312x231.jpg")
+    {
+      list.splice(i, 1);
+    }
+  }
+  */
 
   setTime(newValue:number):void{
     this.time = newValue;

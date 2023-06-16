@@ -49,6 +49,32 @@ namespace Pocket_Cookbook_Backend.Controllers
             return Ok(r);
         }
 
+        // Uses meal's result id to search the db
+        // Returns: Single recipe object matching the meal id
+        [HttpGet("GetSingleRecipeFromDb")]
+        public async Task<ActionResult<Recipe>> GetSingleRecipeFromDb(int id)
+        {
+            return db.Recipes.First(y => y.id == id);
+        }
+
+        // Uses meal's result id to search the db
+        // Returns: List of recipes matching the meal id
+        [HttpGet("GetRecipesFromDb")]
+        public async Task<ActionResult<List<Recipe>>> GetRecipesFromDb(string str)
+        {
+            List<int> ids = str.Split(',').Select(int.Parse).ToList();
+            List<Recipe> r = new List<Recipe>();
+
+            foreach (int id in ids)
+            {
+                if (db.Recipes.Any(x => x.id == id))
+                {
+                    r.Add(db.Recipes.First(y => y.id == id));
+                }
+            }
+            return r;
+        }
+
 
         /*
         // GET: api/Recipe
