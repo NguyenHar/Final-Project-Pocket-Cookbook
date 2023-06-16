@@ -30,7 +30,7 @@ export class MealComponent {
   // So i'm not spending api calls every time the page is loaded
   constructor (private mealService:MealService, private router:Router) {
     // 59 is a meal in my sql database, you have to change it when you pull the solution
-    this.mealService.retrieveMealFromDbById(100).subscribe(
+    this.mealService.retrieveMealFromDbById(59).subscribe(
       (result) => {
         this.mealService.searchResults = result;
         this.resultsList = result;

@@ -83,6 +83,19 @@ namespace Pocket_Cookbook_Backend.Models
         [ForeignKey("Recipe")]
         public int RecipeFK { get; set; }
     }
+    public class Step
+    {
+        [Key]
+        public int primary_key_id { get; set; }
+        public int id { get; set; }
+        public int? number { get; set; }
+        public string? step { get; set; }
+        public virtual ICollection<Ingredient>? ingredients { get; set; } = new List<Ingredient>();
+        public virtual ICollection<Equipment>? equipment { get; set; } = new List<Equipment>();
+        public virtual Analyzedinstruction? AnalyzedInstruction { get; set; }
+        [ForeignKey("Analyzedinstruction")]
+        public int AnalyzedInstructionFK { get; set; }
+    }
 
     public class Measures
     {
@@ -114,19 +127,6 @@ namespace Pocket_Cookbook_Backend.Models
     }
 
 
-    public class Step
-    {
-        [Key]
-        public int primary_key_id { get; set; }
-        public int id { get; set; }
-        public int? number { get; set; }
-        public string? step { get; set; }
-        public virtual ICollection<Ingredient>? ingredients { get; set; } = new List<Ingredient>();
-        public virtual ICollection<Equipment>? equipment { get; set; } = new List<Equipment>();
-        public virtual Analyzedinstruction? AnalyzedInstruction { get; set; }
-        [ForeignKey("Analyzedinstruction")]
-        public int AnalyzedInstructionFK { get; set; }
-    }
 
     public class Ingredient
     {
