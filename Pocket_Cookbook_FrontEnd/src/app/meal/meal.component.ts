@@ -10,15 +10,20 @@ import { Result } from '../meal';
 export class MealComponent {
 
   query:string="";
+  time:number= 30;
   resultsList:Result[] = [];
 
   constructor (private mealService:MealService){
     
   }
 
+  selectTime():void{
+    
+  }
+
   getMealsByQuery():void{
     let searchQuery = this.query;
-    this.mealService.getMeals(this.query).subscribe(
+    this.mealService.getMeals(this.query, this.time).subscribe(
       (result)=> {
         this.resultsList = result;
       }
