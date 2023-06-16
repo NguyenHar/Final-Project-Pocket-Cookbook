@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
 export class MealComponent {
 
   query:string="";
+  time:number=30;
+  newValue:number=0;
+  timeOptions:number[] = [10, 15, 20, 25, 30, 35, 40, 45, 50];
   resultsList:Result[] = [];
 
 
@@ -27,7 +30,7 @@ export class MealComponent {
   // So i'm not spending api calls every time the page is loaded
   constructor (private mealService:MealService, private router:Router) {
     // 59 is a meal in my sql database, you have to change it when you pull the solution
-    this.mealService.retrieveMealFromDbById(59).subscribe(
+    this.mealService.retrieveMealFromDbById(100).subscribe(
       (result) => {
         this.mealService.searchResults = result;
         this.resultsList = result;
@@ -47,7 +50,7 @@ export class MealComponent {
   // Uses user input as the query
   getMealsByQuery():void{
     //let searchQuery = this.query;
-    this.mealService.getMeals(this.query).subscribe(
+    this.mealService.getMeals(this.query, this.time).subscribe(
       (result)=> {
         this.mealService.searchResults = result;
         this.resultsList = result;
@@ -75,7 +78,6 @@ export class MealComponent {
     return false;
   }
 
-
   /* Removed for now, filter is happening in the backend
   // Remove results where the image is a placeholder
   filterNonImageResults(list:Result[]) : void {
@@ -86,4 +88,9 @@ export class MealComponent {
     }
   }
   */
+
+  setTime(newValue:number):void{
+    this.time = newValue;
+    this.getMealsByQuery();
+  }
 }

@@ -14,6 +14,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
 import { FlexLayoutModule } from "@angular/flex-layout";
 
+
 const routes : Route[] = [
   { path:'' , component:MealComponent, pathMatch: 'full' },
   { path:'favorites', component:FavoritesComponent},
@@ -25,7 +26,7 @@ const routes : Route[] = [
     AppComponent,
     MealComponent,
     RecipeComponent,
-    FavoritesComponent
+    FavoritesComponent,
   ],
   imports: [
     BrowserModule, 

@@ -18,8 +18,8 @@ export class MealService {
 
   constructor(private http:HttpClient) { }
   //https://localhost:7270/api/Meal/MealCustomQueryReturnPKId?query=query%3Drice%26number%3D2
-  getMeals(query:string):Observable<Result[]>{
-    return this.http.get<Result[]>(this.url + 'MealCustomQueryReturnResults?' + "query=query%3D" + query + "%26maxReadyTime%3D30");
+  getMeals(query:string, time:number):Observable<Result[]>{
+    return this.http.get<Result[]>(this.url + 'MealCustomQueryReturnResults?' + "query=query%3D" + query + "%26maxReadyTime%3D" + time);
   }
 
   // Retrieves list of meal results from the sql database without making an external API call
