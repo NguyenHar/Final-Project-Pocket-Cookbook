@@ -54,7 +54,19 @@ namespace Pocket_Cookbook_Backend.Controllers
         [HttpGet("GetSingleRecipeFromDb")]
         public async Task<ActionResult<Recipe>> GetSingleRecipeFromDb(int id)
         {
-            return db.Recipes.First(y => y.id == id);
+            // Grab the recipe object
+            Recipe result = db.Recipes.First(y => y.id == id);
+
+            // Calling ToList() gets the database to fill these out 
+            // Doesn't work without doing this for some reason 🤷‍
+            db.extendedingredients.ToList();
+            db.analyzedinstructions.ToList();
+            db.steps.ToList();
+            db.ingredients.ToList();
+            db.equipment.ToList();
+
+
+            return result;
         }
 
         // Uses meal's result id to search the db
@@ -72,6 +84,15 @@ namespace Pocket_Cookbook_Backend.Controllers
                     r.Add(db.Recipes.First(y => y.id == id));
                 }
             }
+
+            // Calling ToList() gets the database to fill these out 
+            // Doesn't work without doing this for some reason 🤷‍
+            db.extendedingredients.ToList();
+            db.analyzedinstructions.ToList();
+            db.steps.ToList();
+            db.ingredients.ToList();
+            db.equipment.ToList();
+
             return r;
         }
 
