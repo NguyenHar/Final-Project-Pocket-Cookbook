@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pocket_Cookbook_Backend.Models;
 
@@ -11,9 +12,11 @@ using Pocket_Cookbook_Backend.Models;
 namespace Pocket_Cookbook_Backend.Migrations
 {
     [DbContext(typeof(CookbookContext))]
-    partial class CookbookContextModelSnapshot : ModelSnapshot
+    [Migration("20230619151647_querymigration")]
+    partial class querymigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -364,6 +367,9 @@ namespace Pocket_Cookbook_Backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("primary_key_id"));
 
+                    b.Property<int?>("Meal")
+                        .HasColumnType("int");
+
                     b.Property<int>("id")
                         .HasColumnType("int");
 
@@ -373,15 +379,12 @@ namespace Pocket_Cookbook_Backend.Migrations
                     b.Property<string>("imageType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("mealFK")
-                        .HasColumnType("int");
-
                     b.Property<string>("title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("primary_key_id");
 
-                    b.HasIndex("mealFK");
+                    b.HasIndex("Meal");
 
                     b.ToTable("Results");
                 });
@@ -508,24 +511,22 @@ namespace Pocket_Cookbook_Backend.Migrations
 
             modelBuilder.Entity("Pocket_Cookbook_Backend.Models.Queries", b =>
                 {
-                    b.HasOne("Pocket_Cookbook_Backend.Models.Meal", "Meal")
+                    b.HasOne("Pocket_Cookbook_Backend.Models.Meal", "meal")
                         .WithMany()
                         .HasForeignKey("mealFK")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Meal");
+                    b.Navigation("meal");
                 });
 
             modelBuilder.Entity("Pocket_Cookbook_Backend.Models.Result", b =>
                 {
-                    b.HasOne("Pocket_Cookbook_Backend.Models.Meal", "Meal")
+                    b.HasOne("Pocket_Cookbook_Backend.Models.Meal", "meal")
                         .WithMany("results")
-                        .HasForeignKey("mealFK")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Meal");
 
-                    b.Navigation("Meal");
+                    b.Navigation("meal");
                 });
 
             modelBuilder.Entity("Pocket_Cookbook_Backend.Models.Step", b =>

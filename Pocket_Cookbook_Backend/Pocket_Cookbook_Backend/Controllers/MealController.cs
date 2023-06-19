@@ -45,7 +45,7 @@ namespace Pocket_Cookbook_Backend.Controllers
         [HttpGet("RetrieveResultsByMealId")]
         public async Task<ActionResult<IEnumerable<Result>>> RetrieveResultsById(int id)
         {
-            List<Result> result = db.Results.Where(x => x.meal.primary_key_id == id).ToList();
+            List<Result> result = db.Results.Where(x => x.Meal.primary_key_id == id).ToList();
             return result;
         }
 
@@ -66,13 +66,82 @@ namespace Pocket_Cookbook_Backend.Controllers
 
             foreach (Result results in db.Meals.OrderBy(x => x.primary_key_id).Last().results.ToList())
             {
-                results.meal = null;
+                results.Meal = null;
                 if (results.image == "https://spoonacular.com/recipeImages/606953-312x231.jpg")
                     continue;
                 returnList.Add(results);
             }
             return returnList;
         }
+
+
+
+        /* Function that returns from database if already exists, otherwise make new api call
+         * Does FillDbCustomQuery() and RetrieveResultsById() in a single function
+         * This function is essentially MealCustomQueryResults(), but stores & retrieves entries in the database rather than repeating api calls
+         * Parameters: query=search query(i.e. pasta), time=time to limit by(i.e. 20,25)
+         * Returns: List of results
+         */
+        [HttpGet("ReturnResultsbyMealQuery")]
+        public async Task<ActionResult<IEnumerable<Result>>> ReturnResultsbyMealQuery(string query, int time)
+        {
+            bool found = false;
+            Queries foundQuery = new Queries();
+
+            foreach (Queries q in db.Queries)
+            {
+                if (q.query == query && q.time == time)
+                {
+                    foundQuery = q;
+                    found = true;
+                    break;
+                }
+            }
+            if (found == true)
+            {
+                List<Result> result = db.Results.Where(x => x.Meal.primary_key_id == foundQuery.mealFK).ToList();
+                return result;
+            }
+
+
+            Meal m = api.SearchMeals(query);
+            m.primary_key_id = 0;
+            db.Meals.Add(m);
+            db.SaveChanges();
+
+            Queries que = new Queries();
+            que.primary_key_id = 0;
+            que.query = query;
+            que.time = time;
+            que.mealFK = m.primary_key_id;
+            db.Queries.Add(que);
+            db.SaveChanges();
+            int mealPk = db.Meals.OrderBy(x => x.primary_key_id).Last().primary_key_id;
+
+            List<Result> returnList = new List<Result>();
+
+            foreach (Result results in db.Meals.OrderBy(x => x.primary_key_id).Last().results.ToList())
+            {
+                results.Meal = null;
+                if (results.image == "https://spoonacular.com/recipeImages/606953-312x231.jpg")
+                    continue;
+                returnList.Add(results);
+            }
+
+            return returnList;
+
+        }
+
+
+
+
+
+
+
+
+
+
+
 
         // Used for testing purposes
         [HttpGet("DummyQuery")]
@@ -87,7 +156,7 @@ namespace Pocket_Cookbook_Backend.Controllers
         [HttpDelete("DeleteMealById")]
         public async Task<IActionResult> DeleteMealById(int id)
         {
-            List<Result> result = db.Results.Where(x => x.meal.primary_key_id == id).ToList();
+            List<Result> result = db.Results.Where(x => x.Meal.primary_key_id == id).ToList();
             foreach (Result r in result)
             {
                 db.Results.Remove(r);
