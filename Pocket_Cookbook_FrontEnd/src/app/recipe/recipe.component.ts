@@ -12,6 +12,7 @@ export class RecipeComponent {
   // Recipe containing pre-determined values from the database, to preserve API calls
   //dummyRecipes:Recipe[] = [];
   dummyRecipe:Recipe = {} as Recipe;
+  showIngredients:boolean = false;
 
   /* Todo
     Before making an api call on the particular dish, first check if it already exists
@@ -33,5 +34,9 @@ export class RecipeComponent {
         this.dummyRecipe = result;
       }
     );
+  }
+
+  toggleIngredients():void {
+    this.showIngredients = !this.showIngredients;
   }
 }

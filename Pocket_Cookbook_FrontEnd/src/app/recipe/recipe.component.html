@@ -1,30 +1,43 @@
-<p>Welcome to the recipe page!</p>
+<h1>{{dummyRecipe.title}}</h1>
+<div class="row">
+    <div class="column">
 
-<h3>{{dummyRecipe.title}}</h3>
-<img src="{{dummyRecipe.image}}">
+        
+        <img src="{{dummyRecipe.image}}">    
+        <div *ngIf="dummyRecipe.cookingMinutes != -1">
+            <p>Prep time: {{dummyRecipe.preparationMinutes}}</p>
+            <p>Cook time: {{dummyRecipe.cookingMinutes}}</p>
+        </div>
+        <div>
+            <p>Ready in: {{dummyRecipe.readyInMinutes}} minutes!</p>
+        </div>
 
 
-<div *ngIf="dummyRecipe.cookingMinutes != -1">
-    <p>Prep time: {{dummyRecipe.preparationMinutes}}</p>
-    <p>Cook time: {{dummyRecipe.cookingMinutes}}</p>
+        
+        <h2>Cooking Instructions</h2>
+        <div class="text_box_list" *ngFor="let s of dummyRecipe.analyzedInstructions[0].steps; let i = index">
+            <p>Step{{i+1}}: {{s.step}}</p>
+            <br/>
+        </div>
+        
+        
+        <p>Recipe PK: {{dummyRecipe.primary_key_id}}</p>
+        <p>Recipe id: {{dummyRecipe.id}}</p>
+        
+    </div>
+    
+
+    <div class="column">
+        <button *ngIf="!showIngredients" (click)="toggleIngredients()">Show Ingredients</button>
+        <button *ngIf="showIngredients" (click)="toggleIngredients()">Hide Ingredients</button>
+        <div *ngIf="showIngredients">
+            <h2>Ingredients</h2>
+            <div class="text_box_list" *ngFor="let ingredient of dummyRecipe.extendedIngredients; let i = index">
+                <p>{{ingredient.original}}</p>
+            </div>
+        </div>
+    </div>
+
+
+
 </div>
-
-
-
-<div>
-    <p>Ready in: {{dummyRecipe.readyInMinutes}} minutes!</p>
-</div>
-
-
-
-<h2>Cooking Instructions</h2>
-
-<!-- This doesn't work because the arrays are empty. Fix foreign key relationships -->
-<div *ngFor="let s of dummyRecipe.analyzedInstructions[0].steps; let i = index">
-    <p>Step{{i+1}}: {{s.step}}</p>
-</div>
-<!-- <p>{{dummyRecipe.instructions}}</p> -->
-
-<p>Recipe PK: {{dummyRecipe.primary_key_id}}</p>
-<p>Recipe id: {{dummyRecipe.id}}</p>
-

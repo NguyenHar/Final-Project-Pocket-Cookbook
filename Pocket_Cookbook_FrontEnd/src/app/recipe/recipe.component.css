@@ -1,0 +1,23 @@
+.text_box_list{
+  border:1px solid #626161;
+  color:#000000;
+  font-size: 18px;
+  width:46rem;
+  position: center;
+  text-align: left;
+  padding-left: 10px;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+ }
+
+/* Create two equal columns that floats next to each other */
+.column {
+    flex: 50%;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .row {
+    display: flex;
+  }
