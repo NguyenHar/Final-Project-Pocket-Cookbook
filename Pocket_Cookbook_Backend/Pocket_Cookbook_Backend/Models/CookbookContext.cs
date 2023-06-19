@@ -7,6 +7,7 @@ namespace Pocket_Cookbook_Backend.Models
     {
         public DbSet<Meal> Meals { get; set; }
         public DbSet<Result> Results { get; set; }
+        public DbSet<Queries> Queries { get; set; }
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<Extendedingredient> extendedingredients { get; set; }
         public DbSet<Analyzedinstruction> analyzedinstructions { get; set; }

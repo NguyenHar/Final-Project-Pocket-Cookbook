@@ -15,3 +15,12 @@ SELECT TOP (1000) [primary_key_id]
       ,[Meal]
   FROM [Cookbook].[dbo].[Results]
 
+  /****** Script for SelectTopNRows command from SSMS  ******/
+SELECT TOP (1000) [primary_key_id]
+      ,[query]
+      ,[time]
+      ,[mealFK]
+  FROM [Cookbook].[dbo].[Queries]
+
+DROP TABLE Results;
+DROP TABLE Queries;
