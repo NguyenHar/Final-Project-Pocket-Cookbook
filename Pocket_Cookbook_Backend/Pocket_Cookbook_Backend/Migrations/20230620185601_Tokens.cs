@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Pocket_Cookbook_Backend.Migrations
 {
     /// <inheritdoc />
-    public partial class queriesMigration : Migration
+    public partial class Tokens : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -64,6 +65,20 @@ namespace Pocket_Cookbook_Backend.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Recipes", x => x.primary_key_id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tokenstorage",
+                columns: table => new
+                {
+                    primary_key_id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    token = table.Column<string>(type: "nvarchar(max)", maxLength: 10000, nullable: false),
+                    dateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tokenstorage", x => x.primary_key_id);
                 });
 
             migrationBuilder.CreateTable(
@@ -359,6 +374,9 @@ namespace Pocket_Cookbook_Backend.Migrations
 
             migrationBuilder.DropTable(
                 name: "Results");
+
+            migrationBuilder.DropTable(
+                name: "tokenstorage");
 
             migrationBuilder.DropTable(
                 name: "measures");

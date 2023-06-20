@@ -416,6 +416,27 @@ namespace Pocket_Cookbook_Backend.Migrations
                     b.ToTable("steps");
                 });
 
+            modelBuilder.Entity("Pocket_Cookbook_Backend.Models.TokenStorage", b =>
+                {
+                    b.Property<int>("primary_key_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("primary_key_id"));
+
+                    b.Property<DateTime>("dateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("token")
+                        .IsRequired()
+                        .HasMaxLength(10000)
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("primary_key_id");
+
+                    b.ToTable("tokenstorage");
+                });
+
             modelBuilder.Entity("Pocket_Cookbook_Backend.Models.Us", b =>
                 {
                     b.Property<int>("primary_key_id")

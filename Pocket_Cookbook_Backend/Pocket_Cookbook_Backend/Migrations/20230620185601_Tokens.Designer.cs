@@ -12,8 +12,8 @@ using Pocket_Cookbook_Backend.Models;
 namespace Pocket_Cookbook_Backend.Migrations
 {
     [DbContext(typeof(CookbookContext))]
-    [Migration("20230619154635_queriesMigration")]
-    partial class queriesMigration
+    [Migration("20230620185601_Tokens")]
+    partial class Tokens
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -417,6 +417,27 @@ namespace Pocket_Cookbook_Backend.Migrations
                     b.HasIndex("AnalyzedInstructionprimary_key_id");
 
                     b.ToTable("steps");
+                });
+
+            modelBuilder.Entity("Pocket_Cookbook_Backend.Models.TokenStorage", b =>
+                {
+                    b.Property<int>("primary_key_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("primary_key_id"));
+
+                    b.Property<DateTime>("dateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("token")
+                        .IsRequired()
+                        .HasMaxLength(10000)
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("primary_key_id");
+
+                    b.ToTable("tokenstorage");
                 });
 
             modelBuilder.Entity("Pocket_Cookbook_Backend.Models.Us", b =>
