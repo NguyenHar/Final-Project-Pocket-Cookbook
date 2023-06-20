@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Pocket_Cookbook_Backend.Models;
+using static Pocket_Cookbook_Backend.Models.KrogerDAL;
 
 namespace Pocket_Cookbook_Backend.Controllers
 {
@@ -10,9 +11,12 @@ namespace Pocket_Cookbook_Backend.Controllers
         public KrogerDAL api = new KrogerDAL();
 
         [HttpGet("DummyQuery")]
-        public void getToken()
+        public AccessToken getToken()
         {
-            getToken();
+            return api.GetProductToken();
         }
+
+
+
     }
 }
