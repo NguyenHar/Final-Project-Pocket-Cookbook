@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MealService } from '../meal.service';
 import { Meal, Result } from '../meal';
 import { Router } from '@angular/router';
+import { RecipeService } from '../recipe.service';
 
 @Component({
   selector: 'app-meal',
@@ -16,18 +17,28 @@ export class MealComponent {
   timeOptions:number[] = [10, 15, 20, 25, 30, 35, 40, 45, 50];
   resultsList:Result[] = [];
 
-  constructor (private mealService:MealService, private router:Router) {
+  constructor (private mealService:MealService, private recipeService:RecipeService, private router:Router) {
    
     /* DELETE THIS LATER
     * this is to populate the front page with stuff every time we refresh
     * so we don't have to enter stuff in the text box every time
     */
-    // this.mealService.returnResultsByMeal('pasta', 30).subscribe(
-    //   (result) => {
-    //     this.mealService.searchResults = result;
-    //     this.resultsList = result;
-    //   }
-    // )
+    this.mealService.returnResultsByMeal('pasta', 30).subscribe(
+      (result) => {
+        this.mealService.searchResults = result;
+        this.resultsList = result;
+
+        let queryIds : number[] = [];
+        result.forEach(function (value) {
+          queryIds.push(value.id);
+        });
+
+        this.recipeService.getRecipeInfoBulk(queryIds).subscribe(
+          (result) => {
+          }
+        )
+      }
+    )
   }
   // Updates the list when anything on the page changes
   ngOnInit() {
@@ -39,12 +50,23 @@ export class MealComponent {
   getMealsByQuery():void{
     //let searchQuery = this.query;
     this.mealService.returnResultsByMeal(this.query, this.time).subscribe(
-      (result)=> {
+      (result) => {
         this.mealService.searchResults = result;
         this.resultsList = result;
+
+        let queryIds : number[] = [];
+        result.forEach(function (value) {
+          queryIds.push(value.id);
+        });
+
+        this.recipeService.getRecipeInfoBulk(queryIds).subscribe(
+          (result) => {
+          }
+        )
       }
     )
   }
+  
 
   // Stores the selected meal result in meal.service.ts as selectedMeal
   selectRecipe(r:Result):void{

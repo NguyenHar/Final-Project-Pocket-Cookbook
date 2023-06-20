@@ -30,18 +30,43 @@ namespace Pocket_Cookbook_Backend.Controllers
         [HttpGet("GetRecipeInfo")]
         public async Task<ActionResult<Recipe>> GetRecipeInfo(int id)
         {
+            bool found = false;
+            Recipe returnRecipe = new Recipe();
             // If exists in database, return it
             foreach (Recipe r in db.Recipes)
             {
                 if (r.id == id)
-                    return r;
+                {
+                    returnRecipe = r;
+                    found = true;
+                    break;
+                }
+            }
+            if (found)
+            {
+                db.extendedingredients.ToList();
+                db.analyzedinstructions.ToList();
+                db.steps.ToList();
+                db.ingredients.ToList();
+                db.equipment.ToList();
+                return returnRecipe;
+            }
+            else
+            {
+                returnRecipe = api.GetRecipeInfo(id);
+                db.extendedingredients.ToList();
+                db.analyzedinstructions.ToList();
+                db.steps.ToList();
+                db.ingredients.ToList();
+                db.equipment.ToList();
+
+                db.Recipes.Add(returnRecipe);
+                db.SaveChanges();
+
+                return returnRecipe;
             }
 
-            // Not found in database, make an api call
-            Recipe recipe = api.GetRecipeInfo(id);
-            db.Recipes.Add(recipe);
-            db.SaveChanges();
-            return recipe;
+
         }
         // Gets information about many recipes, comma separated id's
         // Syntax: id,id2,id3,id4
@@ -87,6 +112,7 @@ namespace Pocket_Cookbook_Backend.Controllers
             db.equipment.ToList();
             return returnRecipes;
         }
+
 
         // Uses meal's result id to search the db
         // Returns: Single recipe object matching the meal id
