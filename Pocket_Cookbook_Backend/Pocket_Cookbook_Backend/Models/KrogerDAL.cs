@@ -11,11 +11,7 @@ namespace Pocket_Cookbook_Backend.Models
     public class KrogerDAL
     {
         string baseUrl = "https://api.kroger.com/v1/";
-        string grant_type = "client_credentials";
-
-
-        string client_id = secret.KrogerClientId;
-        string client_secret = secret.KrogerClientSecret;
+        string base64 = secret.Base64Key;
 
 
 
@@ -32,7 +28,7 @@ namespace Pocket_Cookbook_Backend.Models
             RestClient client = new RestClient("https://api.kroger.com/v1/connect/oauth2/token");
             RestRequest request = new RestRequest();
 
-            request.AddHeader("Authorization", "Basic cG9ja2V0Y29va2Jvb2stN2MyNTZhMjAwOTk3N2NiOGRkMzQxZjVkYmMyOTIyZmIxMjQxMDU5OTU3NDUzNDA1Njc4OlYwX2FEb3dHRVRxT3VLek4wcEJGR2xqSmxDQmNfNklCRXRNbnVtWlk=");
+            request.AddHeader("Authorization", $"Basic {base64}");
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
             request.AddParameter("grant_type", "client_credentials");
             request.AddParameter("scope", "product.compact");
@@ -43,14 +39,38 @@ namespace Pocket_Cookbook_Backend.Models
 
         }
 
-        public KrogerProduct GetProduct(AccessToken at, string query)
+        public Object GetProduct(string at, string query)
         {
             RestClient client = new RestClient(baseUrl + $"products?filter.term={query}&filter.limit=10");
             RestRequest request = new RestRequest();
-            request.AddHeader("Bearer", at.access_token);
-            Task<KrogerProduct> response = client.GetAsync<KrogerProduct>(request);
-            KrogerProduct kp = response.Result;
+            request.AddHeader("Authorization",$"Bearer {at}");
+            Task<Object> response = client.GetAsync<Object>(request);
+            Object kp = response.Result;
             return kp;
+        }
+
+        public string validateToken(CookbookContext db)
+        {
+            List<TokenStorage> storages = db.tokenstorage.ToList();
+            TokenStorage storage = db.tokenstorage.First(x => true);
+            if (storage == null || (DateTime.Now - storage.dateTime).TotalSeconds > 1799)
+            {
+                if (storage != null)
+                {
+                    db.tokenstorage.Remove(storage);
+                }
+                AccessToken token = GetProductToken();
+                TokenStorage ts = new TokenStorage();
+                ts.token = token.access_token;
+                ts.dateTime = DateTime.Now;
+                db.tokenstorage.Add(ts);
+                db.SaveChanges();
+                return ts.token;
+            }
+            else
+            {
+                return storage.token;
+            }
         }
 
     }

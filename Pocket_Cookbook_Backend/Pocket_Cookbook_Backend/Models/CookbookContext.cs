@@ -17,6 +17,8 @@ namespace Pocket_Cookbook_Backend.Models
         public DbSet<Step> steps { get; set; }
         public DbSet<Ingredient> ingredients { get; set; }
         public DbSet<Equipment> equipment { get; set; }
+        public DbSet<TokenStorage> tokenstorage { get; set; }
+
         public CookbookContext() { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

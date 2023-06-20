@@ -6,34 +6,34 @@
         public class KrogerProductResult
         {
             public Datum[] data { get; set; }
-            public Meta meta { get; set; }
+            //public Meta meta { get; set; }
         }
 
-        public class Meta
-        {
-            public Pagination pagination { get; set; }
-        }
+        //public class Meta
+        //{
+        //    public Pagination pagination { get; set; }
+        //}
 
-        public class Pagination
-        {
-            public int start { get; set; }
-            public int limit { get; set; }
-            public int total { get; set; }
-        }
+        //public class Pagination
+        //{
+        //    public int start { get; set; }
+        //    public int limit { get; set; }
+        //    public int total { get; set; }
+        //}
 
         public class Datum
         {
             public string productId { get; set; }
-            public string upc { get; set; }
-            public object[] aisleLocations { get; set; }
-            public string brand { get; set; }
-            public string[] categories { get; set; }
-            public string countryOrigin { get; set; }
-            public string description { get; set; }
-            public Image[] images { get; set; }
-            public Item[] items { get; set; }
-            public Iteminformation itemInformation { get; set; }
-            public Temperature temperature { get; set; }
+            //public string upc { get; set; }
+            //public object[] aisleLocations { get; set; }
+            //public string brand { get; set; }
+            //public string[] categories { get; set; }
+            //public string countryOrigin { get; set; }
+            //public string description { get; set; }
+            //public Image[] images { get; set; }
+            //public Item[] items { get; set; }
+            //public Iteminformation itemInformation { get; set; }
+            //public Temperature temperature { get; set; }
         }
 
         public class Iteminformation
