@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Pocket_Cookbook_Backend.Models;
 
@@ -21,17 +22,26 @@ namespace Pocket_Cookbook_Backend.Controllers
             db = context;
         }
 
+        // Searches the database for an existing query, if true return that query
+        // If it doesn't exist, make an api call and store it in the database
         // Gets information about a single recipe
         // Syntax: id
         // Return single recipe object
         [HttpGet("GetRecipeInfo")]
         public async Task<ActionResult<Recipe>> GetRecipeInfo(int id)
         {
-            Recipe r = api.GetRecipeInfo(id);
-            r.primary_key_id = 0;
-            db.Recipes.Add(r);
+            // If exists in database, return it
+            foreach (Recipe r in db.Recipes)
+            {
+                if (r.id == id)
+                    return r;
+            }
+
+            // Not found in database, make an api call
+            Recipe recipe = api.GetRecipeInfo(id);
+            db.Recipes.Add(recipe);
             db.SaveChanges();
-            return Ok(r);
+            return recipe;
         }
         // Gets information about many recipes, comma separated id's
         // Syntax: id,id2,id3,id4
@@ -39,14 +49,43 @@ namespace Pocket_Cookbook_Backend.Controllers
         [HttpGet("GetRecipeInfoBulk")]
         public async Task<ActionResult<List<Recipe>>> GetRecipeInfoBulk(string ids)
         {
-            List<Recipe> r = api.GetRecipeInfoBulk(ids);
-            foreach (Recipe recipe in r)
+            List<Recipe> returnRecipes = new List<Recipe>();
+            List<int> queryIds = ids.Split(',').Select(Int32.Parse).ToList();
+            string nonExistingIds = "";
+
+            // Parse the string and check if any exist in the database
+            // If they do, return that recipe, else make an api call
+            foreach (int id in queryIds)
             {
-                recipe.primary_key_id = 0;
-                db.Recipes.Add(recipe);
+                Recipe recipe = db.Recipes.FirstOrDefault(x => x.id == id);
+                if (recipe != null)
+                {
+                    returnRecipes.Add(recipe);
+                }
+                else
+                {
+                    nonExistingIds += id + ",";
+                }
             }
-            db.SaveChanges();
-            return Ok(r);
+            if (nonExistingIds != "")
+            {
+                nonExistingIds.TrimEnd(',');
+                List<Recipe> r = api.GetRecipeInfoBulk(nonExistingIds);
+                foreach (Recipe recipe in r)
+                {
+                    recipe.primary_key_id = 0;
+                    db.Recipes.Add(recipe);
+                    returnRecipes.Add(recipe);
+                }
+                db.SaveChanges();
+            }
+
+            db.extendedingredients.ToList();
+            db.analyzedinstructions.ToList();
+            db.steps.ToList();
+            db.ingredients.ToList();
+            db.equipment.ToList();
+            return returnRecipes;
         }
 
         // Uses meal's result id to search the db
@@ -95,6 +134,8 @@ namespace Pocket_Cookbook_Backend.Controllers
 
             return r;
         }
+
+
 
 
         /*

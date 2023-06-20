@@ -24,6 +24,7 @@ namespace Pocket_Cookbook_Backend.Controllers
             db = context;
         }
 
+        /*
         // Add entries to the database based on a specified query
         // Syntax: param=value&param2=value2&param3=value3
         // See https://spoonacular.com/food-api/docs
@@ -74,6 +75,7 @@ namespace Pocket_Cookbook_Backend.Controllers
             }
             return returnList;
         }
+        */
 
 
 
@@ -89,6 +91,7 @@ namespace Pocket_Cookbook_Backend.Controllers
             bool found = false;
             Queries foundQuery = new Queries();
 
+            // Search in database to see if this entry exists
             foreach (Queries q in db.Queries)
             {
                 if (q.query == query && q.time == time)
@@ -98,12 +101,13 @@ namespace Pocket_Cookbook_Backend.Controllers
                     break;
                 }
             }
+            // Entry exists, so return it
             if (found == true)
             {
-                List<Result> result = db.Results.Where(x => x.Meal.primary_key_id == foundQuery.mealFK).ToList();
-                return result;
+                return db.Results.Where(x => x.Meal.primary_key_id == foundQuery.mealFK).ToList();
             }
 
+            // Entry doesn't exist, make api call and store in database
 
             Meal m = api.SearchMeals(query);
             m.primary_key_id = 0;
@@ -121,10 +125,10 @@ namespace Pocket_Cookbook_Backend.Controllers
 
             List<Result> returnList = new List<Result>();
 
+            // Filter out results where image is a placeholder
             foreach (Result results in db.Meals.OrderBy(x => x.primary_key_id).Last().results.ToList())
             {
                 results.Meal = null;
-                // Filter out results where image is a placeholder
                 if (results.image == "https://spoonacular.com/recipeImages/606953-312x231.jpg")
                     continue;
                 returnList.Add(results);
@@ -133,16 +137,6 @@ namespace Pocket_Cookbook_Backend.Controllers
             return returnList;
 
         }
-
-
-
-
-
-
-
-
-
-
 
 
         // Used for testing purposes
@@ -190,7 +184,7 @@ namespace Pocket_Cookbook_Backend.Controllers
         }
 
 
-
+        // Auto generated calls below
         /*
         // GET: api/Meal
         [HttpGet]
