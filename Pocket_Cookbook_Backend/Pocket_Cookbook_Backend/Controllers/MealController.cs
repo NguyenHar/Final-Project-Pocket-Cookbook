@@ -67,6 +67,7 @@ namespace Pocket_Cookbook_Backend.Controllers
             foreach (Result results in db.Meals.OrderBy(x => x.primary_key_id).Last().results.ToList())
             {
                 results.Meal = null;
+                // Filter out results where image is a placeholder
                 if (results.image == "https://spoonacular.com/recipeImages/606953-312x231.jpg")
                     continue;
                 returnList.Add(results);
@@ -123,6 +124,7 @@ namespace Pocket_Cookbook_Backend.Controllers
             foreach (Result results in db.Meals.OrderBy(x => x.primary_key_id).Last().results.ToList())
             {
                 results.Meal = null;
+                // Filter out results where image is a placeholder
                 if (results.image == "https://spoonacular.com/recipeImages/606953-312x231.jpg")
                     continue;
                 returnList.Add(results);

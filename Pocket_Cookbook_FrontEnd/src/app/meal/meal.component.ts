@@ -16,30 +16,18 @@ export class MealComponent {
   timeOptions:number[] = [10, 15, 20, 25, 30, 35, 40, 45, 50];
   resultsList:Result[] = [];
 
-
-  /* Much later todo to preserve API calls
-    Store user inputs into a dictionary/hash map, key=query, value=meal id
-    If the meal type has already been searched for, simply retrieve the meal from the database
-    Otherwise, call the API and store new results inside dictionary and the database
-  */
-
-
-
-
-  // Hard codes to grab from the sql database on refresh
-  // So i'm not spending api calls every time the page is loaded
   constructor (private mealService:MealService, private router:Router) {
-    // 59 is a meal in my sql database, you have to change it when you pull the solution
-    this.mealService.retrieveMealFromDbById(59).subscribe(
-      (result) => {
-        this.mealService.searchResults = result;
-        this.resultsList = result;
-        /* Removed for now, filtering is done in backend
-        this.filterNonImageResults(this.mealService.searchResults);
-        this.filterNonImageResults(this.resultsList);*/
-
-      }
-    )
+   
+    /* DELETE THIS LATER
+    * this is to populate the front page with stuff every time we refresh
+    * so we don't have to enter stuff in the text box every time
+    */
+    // this.mealService.returnResultsByMeal('pasta', 30).subscribe(
+    //   (result) => {
+    //     this.mealService.searchResults = result;
+    //     this.resultsList = result;
+    //   }
+    // )
   }
   // Updates the list when anything on the page changes
   ngOnInit() {
@@ -50,7 +38,7 @@ export class MealComponent {
   // Uses user input as the query
   getMealsByQuery():void{
     //let searchQuery = this.query;
-    this.mealService.getMeals(this.query, this.time).subscribe(
+    this.mealService.returnResultsByMeal(this.query, this.time).subscribe(
       (result)=> {
         this.mealService.searchResults = result;
         this.resultsList = result;
@@ -78,17 +66,7 @@ export class MealComponent {
     return false;
   }
 
-  /* Removed for now, filter is happening in the backend
-  // Remove results where the image is a placeholder
-  filterNonImageResults(list:Result[]) : void {
-    for (let i=0; i<list.length; i++)
-    if (list[i].image == "https://spoonacular.com/recipeImages/606953-312x231.jpg")
-    {
-      list.splice(i, 1);
-    }
-  }
-  */
-
+  // Sets the maximum time required to make the meal
   setTime(newValue:number):void{
     this.time = newValue;
     this.getMealsByQuery();
