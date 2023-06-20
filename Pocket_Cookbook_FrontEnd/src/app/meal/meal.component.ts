@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MealService } from '../meal.service';
 import { Meal, Result } from '../meal';
 import { Router } from '@angular/router';
+import { RecipeService } from '../recipe.service';
 
 @Component({
   selector: 'app-meal',
@@ -16,28 +17,26 @@ export class MealComponent {
   timeOptions:number[] = [10, 15, 20, 25, 30, 35, 40, 45, 50];
   resultsList:Result[] = [];
 
-
-  /* Much later todo to preserve API calls
-    Store user inputs into a dictionary/hash map, key=query, value=meal id
-    If the meal type has already been searched for, simply retrieve the meal from the database
-    Otherwise, call the API and store new results inside dictionary and the database
-  */
-
-
-
-
-  // Hard codes to grab from the sql database on refresh
-  // So i'm not spending api calls every time the page is loaded
-  constructor (private mealService:MealService, private router:Router) {
-    // 59 is a meal in my sql database, you have to change it when you pull the solution
-    this.mealService.retrieveMealFromDbById(59).subscribe(
+  constructor (private mealService:MealService, private recipeService:RecipeService, private router:Router) {
+   
+    /* DELETE THIS LATER
+    * this is to populate the front page with stuff every time we refresh
+    * so we don't have to enter stuff in the text box every time
+    */
+    this.mealService.returnResultsByMeal('pasta', 30).subscribe(
       (result) => {
         this.mealService.searchResults = result;
         this.resultsList = result;
-        /* Removed for now, filtering is done in backend
-        this.filterNonImageResults(this.mealService.searchResults);
-        this.filterNonImageResults(this.resultsList);*/
 
+        let queryIds : number[] = [];
+        result.forEach(function (value) {
+          queryIds.push(value.id);
+        });
+
+        this.recipeService.getRecipeInfoBulk(queryIds).subscribe(
+          (result) => {
+          }
+        )
       }
     )
   }
@@ -50,13 +49,24 @@ export class MealComponent {
   // Uses user input as the query
   getMealsByQuery():void{
     //let searchQuery = this.query;
-    this.mealService.getMeals(this.query, this.time).subscribe(
-      (result)=> {
+    this.mealService.returnResultsByMeal(this.query, this.time).subscribe(
+      (result) => {
         this.mealService.searchResults = result;
         this.resultsList = result;
+
+        let queryIds : number[] = [];
+        result.forEach(function (value) {
+          queryIds.push(value.id);
+        });
+
+        this.recipeService.getRecipeInfoBulk(queryIds).subscribe(
+          (result) => {
+          }
+        )
       }
     )
   }
+  
 
   // Stores the selected meal result in meal.service.ts as selectedMeal
   selectRecipe(r:Result):void{
@@ -78,17 +88,7 @@ export class MealComponent {
     return false;
   }
 
-  /* Removed for now, filter is happening in the backend
-  // Remove results where the image is a placeholder
-  filterNonImageResults(list:Result[]) : void {
-    for (let i=0; i<list.length; i++)
-    if (list[i].image == "https://spoonacular.com/recipeImages/606953-312x231.jpg")
-    {
-      list.splice(i, 1);
-    }
-  }
-  */
-
+  // Sets the maximum time required to make the meal
   setTime(newValue:number):void{
     this.time = newValue;
     this.getMealsByQuery();

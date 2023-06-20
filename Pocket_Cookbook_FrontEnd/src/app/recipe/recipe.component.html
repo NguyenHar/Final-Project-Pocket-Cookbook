@@ -1,28 +1,28 @@
-<h1>{{dummyRecipe.title}}</h1>
+<h1>{{currentRecipe.title}}</h1>
 <div class="row">
     <div class="column">
 
         
-        <img src="{{dummyRecipe.image}}">    
-        <div *ngIf="dummyRecipe.cookingMinutes != -1">
-            <p>Prep time: {{dummyRecipe.preparationMinutes}}</p>
-            <p>Cook time: {{dummyRecipe.cookingMinutes}}</p>
+        <img src="{{currentRecipe.image}}">    
+        <div *ngIf="currentRecipe.cookingMinutes != -1">
+            <p>Prep time: {{currentRecipe.preparationMinutes}}</p>
+            <p>Cook time: {{currentRecipe.cookingMinutes}}</p>
         </div>
         <div>
-            <p>Ready in: {{dummyRecipe.readyInMinutes}} minutes!</p>
+            <p>Ready in: {{currentRecipe.readyInMinutes}} minutes!</p>
         </div>
 
 
         
         <h2>Cooking Instructions</h2>
-        <div class="text_box_list" *ngFor="let s of dummyRecipe.analyzedInstructions[0].steps; let i = index">
+        <div class="text_box_list" *ngFor="let s of currentRecipe.analyzedInstructions[0].steps; let i = index">
             <p>Step{{i+1}}: {{s.step}}</p>
             <br/>
         </div>
         
         
-        <p>Recipe PK: {{dummyRecipe.primary_key_id}}</p>
-        <p>Recipe id: {{dummyRecipe.id}}</p>
+        <p>Recipe PK: {{currentRecipe.primary_key_id}}</p>
+        <p>Recipe id: {{currentRecipe.id}}</p>
         
     </div>
     
@@ -32,7 +32,7 @@
         <button *ngIf="showIngredients" (click)="toggleIngredients()">Hide Ingredients</button>
         <div *ngIf="showIngredients">
             <h2>Ingredients</h2>
-            <div class="text_box_list" *ngFor="let ingredient of dummyRecipe.extendedIngredients; let i = index">
+            <div class="text_box_list" *ngFor="let ingredient of currentRecipe.extendedIngredients; let i = index">
                 <p>{{ingredient.original}}</p>
             </div>
         </div>
