@@ -26,15 +26,25 @@
     
 
     <div class="column">
-        <button *ngIf="!showIngredients" (click)="toggleIngredients()">Show Ingredients</button>
+        <button *ngIf="!showIngredients" (click)="toggleIngredients(); currentRecipeSearch()">Show Ingredients</button>
         <button *ngIf="showIngredients" (click)="toggleIngredients()">Hide Ingredients</button>
         <div *ngIf="showIngredients">
             <h2>Ingredients</h2>
             <div class="text_box_list" *ngFor="let ingredient of currentRecipe.extendedIngredients; let i = index">
-                <p>{{ingredient.original}}</p>
+                <p>{{ingredient.original}}</p> 
+                <p>{{ingredient.nameClean}}</p>
+                <p>Kroger Brand: {{productsForIngredient[i].data[0].brand}}</p>
+                <p>Kroger Price: {{productsForIngredient[i].data[0].items[0].price.regular}}</p>
             </div>
         </div>
+
+        <!-- <button (click)="currentRecipeSearch()">click me </button> -->
+        <!-- <div *ngFor="let p of productsForIngredient">
+            <p>${{p.data[0].items[0].price.regular}}</p>
+            <br/>
+        </div> -->
     </div>
+
 
 
 

@@ -13,6 +13,8 @@
     <Compile Remove="Migrations\20230615164320_initialmigration.Designer.cs" />
     <Compile Remove="Migrations\20230619151647_querymigration.cs" />
     <Compile Remove="Migrations\20230619151647_querymigration.Designer.cs" />
+    <Compile Remove="Migrations\20230621173450_Tokens2.cs" />
+    <Compile Remove="Migrations\20230621173450_Tokens2.Designer.cs" />
     <Compile Remove="Migrations\CookbookContextModelSnapshot.cs" />
   </ItemGroup>
 
