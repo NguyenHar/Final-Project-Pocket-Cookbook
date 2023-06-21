@@ -12,7 +12,7 @@ SELECT TOP (1000) [primary_key_id]
       ,[title]
       ,[image]
       ,[imageType]
-      ,[Meal]
+      ,[mealFK]
   FROM [Cookbook].[dbo].[Results]
 
   /****** Script for SelectTopNRows command from SSMS  ******/
@@ -21,6 +21,3 @@ SELECT TOP (1000) [primary_key_id]
       ,[time]
       ,[mealFK]
   FROM [Cookbook].[dbo].[Queries]
-
-DROP TABLE Results;
-DROP TABLE Queries;

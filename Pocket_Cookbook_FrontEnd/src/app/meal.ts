@@ -17,7 +17,7 @@ export interface Result {
     title:          string;
     image:          string;
     imageType:      string;
-    meal:           null;
+    meal:           Meal;
 }
 // Converts JSON strings to/from your types
 export class Convert {

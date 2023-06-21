@@ -1,13 +1,36 @@
-<p>Would you like to change the time constraints?</p>
-<p>Default is 30 minutes</p>
-<select [(ngModel)]="newValue">
-  <option *ngFor="let t of timeOptions" [ngValue]="t">{{t}}</option>
-</select>
-<button (click)="setTime(newValue)">Change</button>
 
-<p>What would you like to eat?</p>
-<input type="text" [(ngModel)]="query"/>
-<button (click)="getMealsByQuery()">Search</button>
+<div class="radio-toolbar">
+  <input type="radio" id="meal" name="meal" value="meal" [(ngModel)]="selectedSearch">
+  <label for="meal">Search By Meal</label>
+  <input type="radio" id="cuisine" name="meal" value="cuisine" [(ngModel)]="selectedSearch">
+  <label for="cuisine">Search By Cuisine</label>
+</div>
+
+<div *ngIf="selectedSearch != ''">
+  <p>Select a target ready time. Default is 30 minutes.</p>
+  <select [(ngModel)]="newValue">
+    <option *ngFor="let t of timeOptions">{{t}}</option>
+  </select>
+  <button (click)="setTime(newValue)">Change</button>
+</div>
+
+<div *ngIf="selectedSearch == 'meal'">
+  <p>Search the name of a meal</p>
+  <input type="text" [(ngModel)]="query"/>
+  <button (click)="getMealsByQuery()">Search</button>
+</div>
+<div *ngIf="selectedSearch == 'cuisine'">
+  <p>Select a cuisine to choose from</p>
+  <input type="text" [(ngModel)]="query"/>
+  <button (click)="getMealsByCuisine()">Search</button>
+</div>
+
+
+<!-- DO LATER. Pull down 100 results from the api and store it in the database -->
+<!-- Display random 12 from the database -->
+<!-- <p>{{resultQty}}</p>
+<button (click)="randomizeMeal()">Randomize Meals</button> -->
+
 
 
 <div class="content">

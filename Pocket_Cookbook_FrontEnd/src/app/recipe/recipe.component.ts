@@ -13,6 +13,7 @@ export class RecipeComponent {
   showIngredients:boolean = false;
 
 
+
   constructor(private recipeService:RecipeService, private mealService:MealService) {
   }
   ngOnInit() {

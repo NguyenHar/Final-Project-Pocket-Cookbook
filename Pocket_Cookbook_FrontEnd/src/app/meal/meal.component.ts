@@ -11,34 +11,37 @@ import { RecipeService } from '../recipe.service';
 })
 export class MealComponent {
 
+  selectedSearch:string = "";
   query:string="";
-  time:number=30;
+  time:number;
   newValue:number=0;
   timeOptions:number[] = [10, 15, 20, 25, 30, 35, 40, 45, 50];
   resultsList:Result[] = [];
+  //currentMeal:Meal = {} as Meal;
+  resultQty:number = 0;
 
   constructor (private mealService:MealService, private recipeService:RecipeService, private router:Router) {
-   
+    this.time = 30;
     /* DELETE THIS LATER
     * this is to populate the front page with stuff every time we refresh
     * so we don't have to enter stuff in the text box every time
     */
-    this.mealService.returnResultsByMeal('pasta', 30).subscribe(
-      (result) => {
-        this.mealService.searchResults = result;
-        this.resultsList = result;
+    // this.mealService.returnResultsByMeal('pasta', 30).subscribe(
+    //   (result) => {
+    //     this.mealService.searchResults = result;
+    //     this.resultsList = result;
 
-        let queryIds : number[] = [];
-        result.forEach(function (value) {
-          queryIds.push(value.id);
-        });
+    //     let queryIds : number[] = [];
+    //     result.forEach(function (value) {
+    //       queryIds.push(value.id);
+    //     });
 
-        this.recipeService.getRecipeInfoBulk(queryIds).subscribe(
-          (result) => {
-          }
-        )
-      }
-    )
+    //     this.recipeService.getRecipeInfoBulk(queryIds).subscribe(
+    //       () => {
+    //       }
+    //     )
+    //   }
+    // )
   }
   // Updates the list when anything on the page changes
   ngOnInit() {
@@ -50,6 +53,62 @@ export class MealComponent {
   getMealsByQuery():void{
     //let searchQuery = this.query;
     this.mealService.returnResultsByMeal(this.query, this.time).subscribe(
+      (result) => {
+        this.mealService.searchResults = result;
+        this.resultsList = result;
+
+        let queryIds : number[] = [];
+        result.forEach(function (value) {
+          queryIds.push(value.id);
+        });
+
+        this.recipeService.getRecipeInfoBulk(queryIds).subscribe(
+          (result) => {
+
+            this.mealService.getResultCount(this.resultsList[0].primary_key_id).subscribe(
+              (result) => {
+                this.resultQty = result;
+              }
+            )
+          }
+        )
+      }
+    )
+  }
+
+
+  // randomizeMeal():void {
+  //   this.mealService.getMeals(this.query, this.time).subscribe(
+  //     (result) => {
+  //       this.mealService.searchResults = result;
+  //       this.resultsList = result;
+
+  //       let queryIds : number[] = [];
+  //       result.forEach(function (value) {
+  //         queryIds.push(value.id);
+  //       });
+
+  //       this.recipeService.getRecipeInfoBulk(queryIds).subscribe(
+  //         (result) => {
+
+  //           this.mealService.getResultCount(this.resultsList[0].primary_key_id).subscribe(
+  //             (result) => {
+  //               this.resultQty = result;
+  //             }
+  //           )
+  //         }
+  //       )
+  //     }
+  //   )
+  // }
+
+
+
+    // Calls spoonacular API to return a list of meal results
+  // Uses user input as the query
+  getMealsByCuisine():void{
+    //let searchQuery = this.query;
+    this.mealService.returnResultsByCuisine(this.query, this.time).subscribe(
       (result) => {
         this.mealService.searchResults = result;
         this.resultsList = result;
