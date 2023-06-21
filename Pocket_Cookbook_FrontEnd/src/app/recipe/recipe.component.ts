@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Recipe } from '../recipe';
 import { RecipeService } from '../recipe.service';
 import { MealService } from '../meal.service';
+import { KrogerService } from '../kroger.service';
+import { KrogerProduct } from '../kroger';
 
 @Component({
   selector: 'app-recipe',
@@ -11,9 +13,10 @@ import { MealService } from '../meal.service';
 export class RecipeComponent {
   currentRecipe:Recipe = {} as Recipe;
   showIngredients:boolean = false;
+  productsForIngredient:KrogerProduct[] = [];
 
 
-  constructor(private recipeService:RecipeService, private mealService:MealService) {
+  constructor(private recipeService:RecipeService, private mealService:MealService, private krogerService:KrogerService) {
   }
   ngOnInit() {
     this.recipeService.getRecipeInfo(this.mealService.selectedMeal.id).subscribe(
@@ -25,5 +28,13 @@ export class RecipeComponent {
 
   toggleIngredients():void {
     this.showIngredients = !this.showIngredients;
+  }
+
+  getKrogerProductsByQuery(ingredient:string):void{
+    this.krogerService.getKrogerProducts(ingredient).subscribe(
+      (result) => {
+        this.productsForIngredient = result;
+      }
+    )
   }
 }
