@@ -45,4 +45,10 @@ export class MealService {
     return this.http.get<Result[]>(this.url + 'ReturnResultsbyMealQuery?query=cuisine%3D' + query + '%26maxReadyTime%3D' + time);
   }
 
+  // Checks the database and finds the meal's total result number based on result PK id'
+  // Returns: quantity of search results for that meal
+  getResultCount(id:number):Observable<number>{
+    return this.http.get<number>(this.url + 'GetResultCount?resultId=' + id);
+  }
+
 }

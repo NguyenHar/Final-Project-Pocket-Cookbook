@@ -49,6 +49,7 @@ namespace Pocket_Cookbook_Backend.Controllers
             List<Result> result = db.Results.Where(x => x.Meal.primary_key_id == id).ToList();
             return result;
         }
+        */
 
         // Does FillDbCustomQuery() and RetrieveResultsById() in a single function
         // Add entries to the database based on a specified query
@@ -75,7 +76,7 @@ namespace Pocket_Cookbook_Backend.Controllers
             }
             return returnList;
         }
-        */
+        
 
 
 
@@ -104,7 +105,18 @@ namespace Pocket_Cookbook_Backend.Controllers
             // Entry exists, so return it
             if (found == true)
             {
-                return db.Results.Where(x => x.Meal.primary_key_id == foundQuery.mealFK).ToList();
+                List<Result> toReturn = new List<Result>();
+                foreach (Result r in db.Results)
+                {
+                    if (r.image == "https://spoonacular.com/recipeImages/606953-312x231.jpg")
+                        continue;
+                    if (r.mealFK == foundQuery.mealFK)
+                    {
+                        toReturn.Add(r);
+                    }
+                }
+                return toReturn;
+                //return db.Results.Where(x => x.Meal.primary_key_id == foundQuery.mealFK).ToList();
             }
 
             // Entry doesn't exist, make api call and store in database
@@ -136,6 +148,16 @@ namespace Pocket_Cookbook_Backend.Controllers
 
             return returnList;
 
+        }
+
+
+        // Returns qty of results found for the particular meal search
+        [HttpGet("GetResultCount")]
+        public async Task<ActionResult<int?>> GetResultCount(int resultId)
+        {
+            int mealFK = db.Results.FirstOrDefault(x => x.primary_key_id == resultId).mealFK;
+            int? count = db.Meals.FirstOrDefault(x => x.primary_key_id == mealFK).totalResults;
+            return count;
         }
 
 

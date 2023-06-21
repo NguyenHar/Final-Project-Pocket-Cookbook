@@ -9,7 +9,7 @@ namespace Pocket_Cookbook_Backend.Models
 
         public Meal SearchMeals(string query)
         {
-            RestClient client = new RestClient($"{baseurl}/recipes/complexSearch?apiKey={apiKey}&{query}");
+            RestClient client = new RestClient($"{baseurl}/recipes/complexSearch?apiKey={apiKey}&sort=random&{query}");
             RestRequest request = new RestRequest();
             Task<Meal> response = client.GetAsync<Meal>(request);
             return response.Result;
