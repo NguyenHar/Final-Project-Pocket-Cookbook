@@ -24,7 +24,7 @@ namespace Pocket_Cookbook_Backend.Controllers
         }
 
         [HttpGet("ProductSearch/{query}")]
-        public Object GetKrogerProduct(string query)
+        public KrogerProduct GetKrogerProduct(string query)
         {
             string token = api.validateToken(db);
             return api.GetProduct(token, query);
