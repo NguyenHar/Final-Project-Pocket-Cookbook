@@ -27,7 +27,13 @@ namespace Pocket_Cookbook_Backend.Controllers
         public KrogerProduct GetKrogerProduct(string query)
         {
             string token = api.validateToken(db);
-            return api.GetProduct(token, query);
+            KrogerProduct product = api.GetProduct(token, query);
+            //db.data.ToList();
+            //db.images.ToList();
+            //db.items.ToList();
+            //db.sizes.ToList();
+
+            return product;
         }
 
         

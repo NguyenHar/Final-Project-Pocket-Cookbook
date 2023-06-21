@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Recipe } from '../recipe';
+import { ExtendedIngredient, Recipe } from '../recipe';
 import { RecipeService } from '../recipe.service';
 import { MealService } from '../meal.service';
 import { KrogerService } from '../kroger.service';
@@ -33,8 +33,18 @@ export class RecipeComponent {
   getKrogerProductsByQuery(ingredient:string):void{
     this.krogerService.getKrogerProducts(ingredient).subscribe(
       (result) => {
-        this.productsForIngredient = result;
+        this.productsForIngredient.push(result);
       }
     )
   }
+
+  currentRecipeSearch():void{
+    for (let i=0; i<this.currentRecipe.extendedIngredients.length; i++)
+    {
+      let ingredient : ExtendedIngredient = this.currentRecipe.extendedIngredients[i];
+      this.getKrogerProductsByQuery(ingredient.nameClean!);
+    }
+  }
+
 }
+

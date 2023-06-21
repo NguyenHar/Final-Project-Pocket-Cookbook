@@ -14,7 +14,7 @@ export class KrogerService {
   constructor(private http:HttpClient) { }
 
 
-  getKrogerProducts(query:string):Observable<KrogerProduct[]>{
-    return this.http.get<KrogerProduct[]>(this.url + query)
+  getKrogerProducts(query:string):Observable<KrogerProduct>{
+    return this.http.get<KrogerProduct>(this.url + query)
   }
 }

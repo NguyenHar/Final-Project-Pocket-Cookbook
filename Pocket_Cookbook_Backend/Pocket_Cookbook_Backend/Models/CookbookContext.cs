@@ -19,6 +19,15 @@ namespace Pocket_Cookbook_Backend.Models
         public DbSet<Equipment> equipment { get; set; }
         public DbSet<TokenStorage> tokenstorage { get; set; }
         public DbSet<KrogerProduct> krogerProducts { get; set; }
+        public DbSet<Meta> metas { get; set; }
+        public DbSet<Pagination> paginations { get; set; }
+        public DbSet<Datum> data { get; set; }
+        public DbSet<Image> images { get; set; }
+        public DbSet<Size> sizes { get; set; }
+        public DbSet<Item> items { get; set; }
+        public DbSet<Inventory> inventory { get; set; }
+        public DbSet<Fulfillment> fulfillments { get; set; }
+        public DbSet<Price> prices { get; set; }
 
 
         public CookbookContext() { }
