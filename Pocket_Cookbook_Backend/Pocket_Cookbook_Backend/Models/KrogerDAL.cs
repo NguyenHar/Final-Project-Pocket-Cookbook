@@ -39,13 +39,13 @@ namespace Pocket_Cookbook_Backend.Models
 
         }
 
-        public Object GetProduct(string at, string query)
+        public KrogerProduct GetProduct(string at, string query)
         {
-            RestClient client = new RestClient(baseUrl + $"products?filter.term={query}&filter.limit=10");
+            RestClient client = new RestClient(baseUrl + $"products?filter.term={query}&filter.locationId=01800443&filter.limit=10");
             RestRequest request = new RestRequest();
             request.AddHeader("Authorization",$"Bearer {at}");
-            Task<Object> response = client.GetAsync<Object>(request);
-            Object kp = response.Result;
+            Task<KrogerProduct> response = client.GetAsync<KrogerProduct>(request);
+            KrogerProduct kp = response.Result;
             return kp;
         }
 
