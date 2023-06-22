@@ -14,7 +14,7 @@ export class RecipeService {
 
   // Checks database to see if recipe already exists, if it doesn't,
   // Calls Spoonacular API and stores recipe inside database
-  // Return Recipe object based on the Meal's primary key id
+  // Return Recipe object based on the result id
   getRecipeInfo(id:number):Observable<Recipe> {
     return this.http.get<Recipe>(this.baseURL + "GetRecipeInfo?id=" + id);
   }
