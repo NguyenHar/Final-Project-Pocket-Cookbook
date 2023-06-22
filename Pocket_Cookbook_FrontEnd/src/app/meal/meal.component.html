@@ -15,7 +15,7 @@
 </div>
 
 <div *ngIf="selectedSearch == 'meal'">
-  <p>Search the name of a meal</p>
+  <p>Search the name of a meal or ingredient</p>
   <input type="text" [(ngModel)]="query"/>
   <button (click)="getMealsByQuery()">Search</button>
 </div>

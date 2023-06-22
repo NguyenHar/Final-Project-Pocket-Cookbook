@@ -46,13 +46,27 @@ namespace Pocket_Cookbook_Backend.Models
             request.AddHeader("Authorization",$"Bearer {at}");
             Task<KrogerProduct> response = client.GetAsync<KrogerProduct>(request);
             KrogerProduct kp = response.Result;
+            foreach (var d in kp.data)
+            {
+                if (d != null)
+                {
+                    foreach (var i in d.items)
+                    {
+                        if (i == null || i.price == null || i.price.regular == null)
+                        {
+                            i.price = new Price();
+                            i.price.regular = 0;
+                        }
+                    }
+                }
+            }
             return kp;
         }
 
         public string validateToken(CookbookContext db)
         {
             List<TokenStorage> storages = db.tokenstorage.ToList();
-            TokenStorage storage = db.tokenstorage.First(x => true);
+            TokenStorage storage = db.tokenstorage.FirstOrDefault(x => true);
             if (storage == null || (DateTime.Now - storage.dateTime).TotalSeconds > 1799)
             {
                 if (storage != null)
