@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Pocket_Cookbook_Backend.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using static Pocket_Cookbook_Backend.Models.KrogerDAL;
 
 namespace Pocket_Cookbook_Backend.Controllers
@@ -28,15 +29,51 @@ namespace Pocket_Cookbook_Backend.Controllers
         {
             string token = api.validateToken(db);
             KrogerProduct product = api.GetProduct(token, query);
-            //db.data.ToList();
-            //db.images.ToList();
-            //db.items.ToList();
-            //db.sizes.ToList();
 
             return product;
         }
 
         
+        [HttpGet("GetMultipleProducts")]
+        public async Task<ActionResult<IEnumerable<KrogerProduct>>> GetMultipleProducts(string list)
+        {
+            List<string> queries = list.Split(',').ToList();
+            List<Task<KrogerProduct>> listOfTasks = new List<Task<KrogerProduct>>();
+
+            foreach (string query in queries)
+            {
+                listOfTasks.Add(DoKrogerAsync(query));
+            }
+
+            return await Task.WhenAll<KrogerProduct>(listOfTasks);
+        }
+
+        [HttpGet("DontUseThis")]
+        public Task<KrogerProduct> DoKrogerAsync(string item)
+        {
+            //Task.Delay(100);
+            string token = api.validateToken(db);
+            return Task.FromResult(api.GetProduct(token, item));
+        }
+
+        /*
+        [HttpGet("GetMultipleProducts")]
+        public ActionResult<List<KrogerProduct>> GetMultipleProducts(string list)
+        {
+            List<string> queries = list.Split(',').ToList();
+            List<KrogerProduct> products = new List<KrogerProduct>();
+            string token = api.validateToken(db);
+
+            foreach (string query in queries)
+            {
+                products.Add(api.GetProduct(token, query));
+            }
+
+            return products;
+        }*/
+
+
+
         [HttpPost]
         public async Task<ActionResult<TokenStorage>> PostRecipe(TokenStorage recipe)
         {

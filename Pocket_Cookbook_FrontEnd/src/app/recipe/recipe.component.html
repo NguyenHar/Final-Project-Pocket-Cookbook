@@ -31,11 +31,19 @@
             <div class="text_box_list" *ngFor="let ingredient of currentRecipe.extendedIngredients; let i = index">
                 <p>Recipe calls for: {{ingredient.original}}</p> 
                 <p>Whole ingredient: {{ingredient.nameClean}}</p>
-                <p>Kroger Brand: {{productsForIngredient[i].data[0].brand}}</p>
-                <div *ngIf="productsForIngredient[i].data[0].items[0].price.regular == 0; else elseBlock">
-                    <p>Kroger price not found</p>
-                </div>
-                <ng-template #elseBlock>Kroger Price: {{productsForIngredient[i].data[0].items[0].price.regular}}</ng-template>
+                <p *ngIf="productsForIngredient[i] != null">Available brand at Kroger: {{productsForIngredient[i].data[0].brand}}</p>
+
+                <!-- Loop that displays all 3 options -->
+                <!-- <div *ngIf="productsForIngredient[i].data[0].items[0].price.regular != 0; else elseBlock">
+                    <div *ngFor="let d of productsForIngredient[i].data; let j = index">
+                        <div *ngFor="let ing of d.items">
+                            <p>Brand: {{d.brand}} || Price:{{ing.price.regular}}</p>
+                        </div>
+                    </div> -->
+                    <!-- </div> -->
+                    
+                <p *ngIf="productsForIngredient[i] != null">Kroger Price: {{productsForIngredient[i].data[0].items[0].price.regular}}</p>
+                <ng-template #elseBlock>Kroger price not found</ng-template>
             </div>
         </div>
 
