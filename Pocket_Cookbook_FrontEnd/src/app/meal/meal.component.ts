@@ -43,7 +43,7 @@ export class MealComponent {
           }
         )
       }
-    )
+    );
   }
   // Updates the list when anything on the page changes
   ngOnInit() {
@@ -66,7 +66,7 @@ export class MealComponent {
 
         this.recipeService.getRecipeInfoBulk(queryIds).subscribe(
           (result) => {
-
+            this.recipes = result;
             this.mealService.getResultCount(this.resultsList[0].primary_key_id).subscribe(
               (result) => {
                 this.resultQty = result;
@@ -78,35 +78,7 @@ export class MealComponent {
     )
   }
 
-
-  // randomizeMeal():void {
-  //   this.mealService.getMeals(this.query, this.time).subscribe(
-  //     (result) => {
-  //       this.mealService.searchResults = result;
-  //       this.resultsList = result;
-
-  //       let queryIds : number[] = [];
-  //       result.forEach(function (value) {
-  //         queryIds.push(value.id);
-  //       });
-
-  //       this.recipeService.getRecipeInfoBulk(queryIds).subscribe(
-  //         (result) => {
-
-  //           this.mealService.getResultCount(this.resultsList[0].primary_key_id).subscribe(
-  //             (result) => {
-  //               this.resultQty = result;
-  //             }
-  //           )
-  //         }
-  //       )
-  //     }
-  //   )
-  // }
-
-
-
-    // Calls spoonacular API to return a list of meal results
+  // Calls spoonacular API to return a list of meal results
   // Uses user input as the query
   getMealsByCuisine():void{
     //let searchQuery = this.query;
