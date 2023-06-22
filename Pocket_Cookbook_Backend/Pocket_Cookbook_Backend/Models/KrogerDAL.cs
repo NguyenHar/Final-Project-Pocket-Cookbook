@@ -50,6 +50,8 @@ namespace Pocket_Cookbook_Backend.Models
             {
                 if (d != null)
                 {
+                    if (d.brand == null)
+                        d.brand = "Brand not found";
                     foreach (var i in d.items)
                     {
                         if (i == null || i.price == null || i.price.regular == null)
