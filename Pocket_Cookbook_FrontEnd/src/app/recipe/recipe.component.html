@@ -1,8 +1,6 @@
 <h1>{{currentRecipe.title}}</h1>
-<div class="row">
-    <div class="column">
-
-        
+<div class="rowRecipe">
+    <div class="columnRecipe">
         <img src="{{currentRecipe.image}}">    
         <div *ngIf="currentRecipe.cookingMinutes != -1">
             <p>Prep time: {{currentRecipe.preparationMinutes}}</p>
@@ -12,8 +10,6 @@
             <p>Ready in: {{currentRecipe.readyInMinutes}} minutes!</p>
         </div>
 
-
-        
         <h2>Cooking Instructions</h2>
         <div class="text_box_list" *ngFor="let s of currentRecipe.analyzedInstructions[0].steps; let i = index">
             <p>Step{{i+1}}: {{s.step}}</p>
@@ -25,16 +21,21 @@
     </div>
     
 
-    <div class="column">
-        <button *ngIf="!showIngredients" (click)="toggleIngredients(); currentRecipeSearch()">Show Ingredients</button>
+    <div class="columnRecipe">
+        <!-- Removes the button that toggles appeareance -->
+        <!-- <button *ngIf="!showIngredients" (click)="toggleIngredients(); currentRecipeSearch()">Show Ingredients</button>
         <button *ngIf="showIngredients" (click)="toggleIngredients()">Hide Ingredients</button>
-        <div *ngIf="showIngredients">
+        <div *ngIf="showIngredients"> -->
+        <div>
             <h2>Ingredients</h2>
             <div class="text_box_list" *ngFor="let ingredient of currentRecipe.extendedIngredients; let i = index">
-                <p>{{ingredient.original}}</p> 
-                <p>{{ingredient.nameClean}}</p>
+                <p>Recipe calls for: {{ingredient.original}}</p> 
+                <p>Whole ingredient: {{ingredient.nameClean}}</p>
                 <p>Kroger Brand: {{productsForIngredient[i].data[0].brand}}</p>
-                <p>Kroger Price: {{productsForIngredient[i].data[0].items[0].price.regular}}</p>
+                <div *ngIf="productsForIngredient[i].data[0].items[0].price.regular == 0; else elseBlock">
+                    <p>Kroger price not found</p>
+                </div>
+                <ng-template #elseBlock>Kroger Price: {{productsForIngredient[i].data[0].items[0].price.regular}}</ng-template>
             </div>
         </div>
 

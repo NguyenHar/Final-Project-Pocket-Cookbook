@@ -19,10 +19,11 @@ export class RecipeComponent {
 
   constructor(private recipeService:RecipeService, private mealService:MealService, private krogerService:KrogerService) {
   }
-  ngOnInit() {
-    this.recipeService.getRecipeInfo(this.mealService.selectedMeal.id).subscribe(
+  async ngOnInit() {
+    await this.recipeService.getRecipeInfo(this.mealService.selectedMeal.id).subscribe(
       (result) => {
         this.currentRecipe = result;
+        this.currentRecipeSearch();
       }
     );
   }
@@ -31,7 +32,7 @@ export class RecipeComponent {
     this.showIngredients = !this.showIngredients;
   }
 
-  getKrogerProductsByQuery(ingredient:string):void{
+  async getKrogerProductsByQuery(ingredient:string):Promise<void>{
     this.krogerService.getKrogerProducts(ingredient).subscribe(
       (result) => {
         this.productsForIngredient.push(result);
@@ -39,12 +40,17 @@ export class RecipeComponent {
     )
   }
 
-  currentRecipeSearch():void{
+  async currentRecipeSearch():Promise<void>{
     for (let i=0; i<this.currentRecipe.extendedIngredients.length; i++)
     {
       let ingredient : ExtendedIngredient = this.currentRecipe.extendedIngredients[i];
-      this.getKrogerProductsByQuery(ingredient.nameClean!);
+      await this.getKrogerProductsByQuery(ingredient.nameClean!);
+      //await this.delay(1000);
     }
+  }
+
+  delay(ms:number) : any{
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
 }

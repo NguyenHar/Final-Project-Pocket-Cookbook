@@ -26,22 +26,22 @@ export class MealComponent {
     * this is to populate the front page with stuff every time we refresh
     * so we don't have to enter stuff in the text box every time
     */
-    // this.mealService.returnResultsByMeal('pasta', 30).subscribe(
-    //   (result) => {
-    //     this.mealService.searchResults = result;
-    //     this.resultsList = result;
+    this.mealService.returnResultsByMeal('pasta', 30).subscribe(
+      (result) => {
+        this.mealService.searchResults = result;
+        this.resultsList = result;
 
-    //     let queryIds : number[] = [];
-    //     result.forEach(function (value) {
-    //       queryIds.push(value.id);
-    //     });
+        let queryIds : number[] = [];
+        result.forEach(function (value) {
+          queryIds.push(value.id);
+        });
 
-    //     this.recipeService.getRecipeInfoBulk(queryIds).subscribe(
-    //       () => {
-    //       }
-    //     )
-    //   }
-    // )
+        this.recipeService.getRecipeInfoBulk(queryIds).subscribe(
+          () => {
+          }
+        )
+      }
+    )
   }
   // Updates the list when anything on the page changes
   ngOnInit() {
