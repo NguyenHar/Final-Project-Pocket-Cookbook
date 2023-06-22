@@ -26,24 +26,18 @@
 </div>
 
 
-<!-- DO LATER. Pull down 100 results from the api and store it in the database -->
-<!-- Display random 12 from the database -->
-<!-- <p>{{resultQty}}</p>
-<button (click)="randomizeMeal()">Randomize Meals</button> -->
-
-
-
 <div class="content">
   <div fxLayout="row wrap" fxLayoutGap="100px grid">
     <div
       fxFlex="25%"
       fxFlex.xs="100%"  
-      fxFlex.sm="33%" *ngFor="let r of resultsList">
+      fxFlex.sm="33%" *ngFor="let r of resultsList; let i = index">
           <mat-card class="mat-elevation-z4" style="background-color: aliceblue;">
           <img mat-card-image src="{{r.image}}"/>
           <mat-card-content>
           <p>{{r.title}}</p>
         </mat-card-content>
+        <p>Ready In: {{recipes[i].readyInMinutes}} minutes</p>
         <mat-card-actions>
           <span style="margin-left:auto; margin-right:10px">
             <button mat-raised-button (click)="selectRecipe(r)"

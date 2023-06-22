@@ -3,6 +3,7 @@ import { MealService } from '../meal.service';
 import { Meal, Result } from '../meal';
 import { Router } from '@angular/router';
 import { RecipeService } from '../recipe.service';
+import { Recipe } from '../recipe';
 
 @Component({
   selector: 'app-meal',
@@ -17,8 +18,8 @@ export class MealComponent {
   newValue:number=0;
   timeOptions:number[] = [10, 15, 20, 25, 30, 35, 40, 45, 50];
   resultsList:Result[] = [];
-  //currentMeal:Meal = {} as Meal;
   resultQty:number = 0;
+  recipes:Recipe[] = [];
 
   constructor (private mealService:MealService, private recipeService:RecipeService, private router:Router) {
     this.time = 30;
@@ -37,7 +38,8 @@ export class MealComponent {
         });
 
         this.recipeService.getRecipeInfoBulk(queryIds).subscribe(
-          () => {
+          (result) => {
+            this.recipes = result;
           }
         )
       }
