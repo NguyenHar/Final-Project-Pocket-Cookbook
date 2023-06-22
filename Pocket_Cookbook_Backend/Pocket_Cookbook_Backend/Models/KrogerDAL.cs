@@ -23,6 +23,9 @@ namespace Pocket_Cookbook_Backend.Models
             public string token_type { get; set; }
         }
 
+
+        //gets bearer token from Kroger 
+        //clientID and client secret base64 encoded into one string
         public AccessToken GetProductToken()
         {
             RestClient client = new RestClient("https://api.kroger.com/v1/connect/oauth2/token");
@@ -39,6 +42,7 @@ namespace Pocket_Cookbook_Backend.Models
 
         }
 
+        //kroger product query
         public KrogerProduct GetProduct(string at, string query)
         {
             RestClient client = new RestClient(baseUrl + $"products?filter.term={query}&filter.locationId=01800443&filter.limit=3");
