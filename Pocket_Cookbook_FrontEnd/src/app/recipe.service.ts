@@ -7,9 +7,7 @@ import { Recipe } from './recipe';
   providedIn: 'root'
 })
 export class RecipeService {
-  baseURL:string = "https://localhost:7270/api/Recipe/";
-  // loadedRecipes:Recipe[] = [];
-  
+  baseURL:string = "https://localhost:7270/api/Recipe/";  
   constructor(private http:HttpClient) { 
 
   }
