@@ -14,12 +14,10 @@ export class RecipeComponent {
   currentRecipe:Recipe = {} as Recipe;
   productsForIngredient:KrogerProduct[] = [];
 
-
-
   constructor(private recipeService:RecipeService, private mealService:MealService, private krogerService:KrogerService) {
   }
   ngOnInit() {
-    this.recipeService.getRecipeInfo(this.mealService.selectedMeal.id).subscribe(
+    this.recipeService.getRecipeInfo(this.mealService.mealSelectionData.selectedMeal.id).subscribe(
       (result) => {
         this.currentRecipe = result;
         this.getKrogerProductList();
@@ -27,6 +25,9 @@ export class RecipeComponent {
       );
   }
 
+  // Creates a comma-separated string of ingredient names
+  // Sends the string to the backend function where the kroger api is called
+  // Stores list of kroger product object that is returned from the api
   getKrogerProductList():void{
     let list : string = "";
     for (let i=0; i<this.currentRecipe.extendedIngredients.length; i++)
@@ -45,9 +46,5 @@ export class RecipeComponent {
       }
     );
   }
-  
-
-
-
 }
 

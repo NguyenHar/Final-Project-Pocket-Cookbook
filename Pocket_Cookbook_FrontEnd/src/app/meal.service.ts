@@ -1,34 +1,34 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Meal, Result } from './meal';
+import { Meal, MealSelection, Result } from './meal';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MealService {
-
+  // Object that encapsulates all of the input information necessary
+  mealSelectionData:MealSelection = {} as MealSelection;
   url:string = "https://localhost:7270/api/Meal/";
-  // Meal result selected by button on the home page, to be displayed on recipes page
-  selectedMeal:Result = {} as Result; 
-  // List of favorited meal results to be displayed on favorites page
-  favoritedMeals:Result[] = [];
-  // List of meal results from the user's search
-  searchResults:Result[] = [];
 
-  constructor(private http:HttpClient) { }
-
-  // Obsolete
-  // Retrieves list of meal results from api call
-  getMeals(query:string, time:number):Observable<Result[]>{
-    return this.http.get<Result[]>(this.url + 'MealCustomQueryReturnResults?' + "query=query%3D" + query + "%26maxReadyTime%3D" + time);
+  constructor(private http:HttpClient) { 
+    this.mealSelectionData.time = 30;
+    this.mealSelectionData.recipes = [];
+    this.mealSelectionData.resultsList = [];
+    this.mealSelectionData.favoritedMeals = [];
   }
 
-  // Obsolete
-  // Retrieves list of meal results from the sql database without making an external API call
-  retrieveMealFromDbById(id:number):Observable<Result[]>{
-    return this.http.get<Result[]>(this.url + 'RetrieveResultsByMealId?id=' + id);
-  }
+  // // Obsolete
+  // // Retrieves list of meal results from api call
+  // getMeals(query:string, time:number):Observable<Result[]>{
+  //   return this.http.get<Result[]>(this.url + 'MealCustomQueryReturnResults?' + "query=query%3D" + query + "%26maxReadyTime%3D" + time);
+  // }
+
+  // // Obsolete
+  // // Retrieves list of meal results from the sql database without making an external API call
+  // retrieveMealFromDbById(id:number):Observable<Result[]>{
+  //   return this.http.get<Result[]>(this.url + 'RetrieveResultsByMealId?id=' + id);
+  // }
 
   // Makes the above 2 functions obsolete
   // Checks database to see if this request already exists in database, if true return those results

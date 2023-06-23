@@ -2,6 +2,9 @@
 //
 //   import { Convert, Meal } from "./file";
 //
+
+import { Recipe } from "./recipe";
+
 //   const meal = Convert.toMeal(json);
 export interface Meal {
     primary_key_id: number;
@@ -19,6 +22,19 @@ export interface Result {
     imageType:      string;
     meal:           Meal;
 }
+
+export interface MealSelection {
+    selectedMeal:   Result;
+    selectedSearch: string;
+    query:          string;
+    time:           number;
+    newValue:       number;
+    recipes:        Recipe[];
+    resultsList:    Result[];
+    favoritedMeals: Result[];
+}
+
+
 // Converts JSON strings to/from your types
 export class Convert {
     public static toMeal(json: string): Meal {
