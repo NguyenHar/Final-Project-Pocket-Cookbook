@@ -15,17 +15,17 @@ export class FavoritesComponent {
   }
   // Update the displayed list whenver the page is modified
   ngOnInit() {
-    this.favoritedMeals = this.mealService.favoritedMeals;
+    this.favoritedMeals = this.mealService.mealSelectionData.favoritedMeals;
   }
 
   // Stores the selected meal result in meal.service.ts as selectedMeal
   selectRecipe(r:Result):void{
-    this.mealService.selectedMeal = r;
+    this.mealService.mealSelectionData.selectedMeal = r;
     this.router.navigate(['recipe']);
   }
 
   // Removes the favorited meal from meal.service.ts's favoritedMeals
   removeFavorite(index:number):void {
-    this.mealService.favoritedMeals.splice(index, 1);
+    this.mealService.mealSelectionData.favoritedMeals.splice(index, 1);
   }
 }

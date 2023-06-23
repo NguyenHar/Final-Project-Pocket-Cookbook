@@ -8,6 +8,8 @@ import { Recipe } from './recipe';
 })
 export class RecipeService {
   baseURL:string = "https://localhost:7270/api/Recipe/";
+  // loadedRecipes:Recipe[] = [];
+  
   constructor(private http:HttpClient) { 
 
   }
