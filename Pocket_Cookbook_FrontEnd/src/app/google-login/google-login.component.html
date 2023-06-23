@@ -1,0 +1,10 @@
+<div *ngIf="user">
+    <img src="{{ user.photoUrl }}" referrerpolicy="no-referrer">
+    <div>
+        <h1>Welcome</h1>
+        <h4>{{ user.name }}</h4>
+        <p>{{ user.email }}</p>
+        <p>{{ user.id }}</p>
+    </div>
+</div>
+

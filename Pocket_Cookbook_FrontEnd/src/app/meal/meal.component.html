@@ -1,11 +1,11 @@
-
+<!-- Navigation menu -->
 <div class="radio-toolbar">
   <input type="radio" id="meal" name="meal" value="meal" [(ngModel)]="mealSelectionData.selectedSearch">
   <label for="meal">Search By Meal</label>
   <input type="radio" id="cuisine" name="meal" value="cuisine" [(ngModel)]="mealSelectionData.selectedSearch">
   <label for="cuisine">Search By Cuisine</label>
-</div>
 
+<!-- Selection radio buttons -->
 <div *ngIf="mealSelectionData.selectedSearch != null">
   <p>Select a target ready time. Default is 30 minutes.</p>
   <select [(ngModel)]="mealSelectionData.time" (change)="getMealsByQuery()">
@@ -26,7 +26,7 @@
   </select>
 </div>
 
-
+<!-- Display the result cards -->
 <div class="content">
   <div fxLayout="row wrap" fxLayoutGap="100px grid">
     <div
@@ -40,11 +40,13 @@
         </mat-card-content>
         <p>Ready In: {{mealSelectionData.recipes[i].readyInMinutes}} minutes</p>
         <mat-card-actions>
-          <span style="margin-left:auto; margin-right:10px">
+          <span style="margin:auto">
             <button mat-raised-button (click)="selectRecipe(r)"
             class="buttons" style= "background-color:blue; color:white"> View Recipe </button>
           </span>
-          <span style="margin-left:10px; margin-right:auto">
+
+
+          <span style="margin-left:10px; margin-right:auto" *ngIf="loggedIn">
             <button mat-raised-button (click)="favoriteRecipe(r)" *ngIf="!checkFavorite(r.primary_key_id)"
             class="buttons" style= "background-color:green; color:white"> Save For Later </button>
             <p *ngIf="checkFavorite(r.primary_key_id)" style="margin:0px">⭐</p>

@@ -28,6 +28,7 @@ namespace Pocket_Cookbook_Backend.Models
         public DbSet<Inventory> inventory { get; set; }
         public DbSet<Fulfillment> fulfillments { get; set; }
         public DbSet<Price> prices { get; set; }
+        public DbSet<UserFavorites> userFavorites { get; set; }
 
 
         public CookbookContext() { }

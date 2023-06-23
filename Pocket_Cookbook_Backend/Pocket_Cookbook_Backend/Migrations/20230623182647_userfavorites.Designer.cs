@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pocket_Cookbook_Backend.Models;
 
@@ -11,9 +12,11 @@ using Pocket_Cookbook_Backend.Models;
 namespace Pocket_Cookbook_Backend.Migrations
 {
     [DbContext(typeof(CookbookContext))]
-    partial class CookbookContextModelSnapshot : ModelSnapshot
+    [Migration("20230623182647_userfavorites")]
+    partial class userfavorites
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -675,28 +678,6 @@ namespace Pocket_Cookbook_Backend.Migrations
                     b.ToTable("units_us");
                 });
 
-            modelBuilder.Entity("Pocket_Cookbook_Backend.Models.UserFavorites", b =>
-                {
-                    b.Property<int>("primary_key_id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("primary_key_id"));
-
-                    b.Property<string>("googleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("resultFK")
-                        .HasColumnType("int");
-
-                    b.HasKey("primary_key_id");
-
-                    b.HasIndex("resultFK");
-
-                    b.ToTable("userFavorites");
-                });
-
             modelBuilder.Entity("Price", b =>
                 {
                     b.Property<int>("primary_key_id")
@@ -915,17 +896,6 @@ namespace Pocket_Cookbook_Backend.Migrations
                         .HasForeignKey("AnalyzedInstructionprimary_key_id");
 
                     b.Navigation("AnalyzedInstruction");
-                });
-
-            modelBuilder.Entity("Pocket_Cookbook_Backend.Models.UserFavorites", b =>
-                {
-                    b.HasOne("Pocket_Cookbook_Backend.Models.Result", "Result")
-                        .WithMany()
-                        .HasForeignKey("resultFK")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Result");
                 });
 
             modelBuilder.Entity("Size", b =>
