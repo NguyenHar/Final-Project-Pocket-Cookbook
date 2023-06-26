@@ -10,12 +10,25 @@ export class KrogerService {
 
   url:string="https://localhost:7270/api/Kroger/"
   searchResults:KrogerProduct[] = [];
+  shoppingList:string[] = [];
+  productsToShop:KrogerProduct[] = [];
+  kp:KrogerProduct = {} as KrogerProduct;
   
   constructor(private http:HttpClient) { }
 
 
   getKrogerProducts(query:string):Observable<KrogerProduct>{
     return this.http.get<KrogerProduct>(this.url + 'ProductSearch/' + query)
+  }
+
+  getShoppingListKrogerItems(query:string):void{
+    this.getKrogerProducts(query).subscribe(
+      (result) => {
+        this.kp = result
+        this.productsToShop.push(this.kp);
+      }
+    )
+    
   }
 
 

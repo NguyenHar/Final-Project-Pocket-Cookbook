@@ -13,6 +13,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 import { GoogleLoginProvider} from '@abacritt/angularx-social-login';
 import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
@@ -22,8 +23,10 @@ const routes : Route[] = [
   { path:'' , component:MealComponent, pathMatch: 'full' },
   { path:'favorites', component:FavoritesComponent},
   { path:'recipe', component:RecipeComponent},
+  { path:'shopping-list', component:ShoppingListComponent},
   { path:'login', component:GoogleLoginComponent},
   { path:'home', component:MealComponent },
+
 ];
 
 @NgModule({
@@ -32,6 +35,7 @@ const routes : Route[] = [
     MealComponent,
     RecipeComponent,
     FavoritesComponent,
+    ShoppingListComponent,
     GoogleLoginComponent
   ],
   imports: [

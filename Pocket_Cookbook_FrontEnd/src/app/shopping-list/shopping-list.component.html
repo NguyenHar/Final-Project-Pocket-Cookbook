@@ -1,0 +1,50 @@
+<p>shopping-list works!</p>
+
+
+<div class="table-container">
+  <div class="table-horizontal-container">
+    <table class="unfixed-table">
+      <tbody>
+        <tr *ngFor="let c of currentShoppingList"><th>{{c}}</th><span *ngFor="let k of krogerSearchResults"><td *ngFor="let d of k.data">{{d.brand}}</td></span><td>Column three</td><td>Column four</td><td>Column firve</td><td>Column six</td><td>Column seven</td><td>Column eight</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- </object>
+</article> -->
+
+
+
+
+
+
+
+
+<!-- <table>
+    <tr *ngFor="let c of currentShoppingList">
+      <th>{{c}}</th>
+    </tr>
+    <tr *ngFor="let k of krogerSearchResults">
+    <div *ngFor="let d of k.data">
+      <td>{{d.brand}}</td>
+      <td *ngFor="let i of d.items">{{i.price.regular}}</td>
+    </div>
+    </tr>
+  </table>
+
+<button (click)="clearShoppingList()">Clear Shopping List</button> -->
+<!-- <div *ngFor="let c of currentShoppingList">
+    <p>{{c}}</p>
+</div> -->
+
+<!-- <div *ngFor="let k of krogerSearchResults">
+    <div *ngFor="let d of k.data">
+        <p>{{d.brand}}</p>
+        <div *ngFor="let i of d.items">
+            <p>{{i.price.regular}}</p>
+
+        </div>>
+
+    </div>
+</div> -->
+
