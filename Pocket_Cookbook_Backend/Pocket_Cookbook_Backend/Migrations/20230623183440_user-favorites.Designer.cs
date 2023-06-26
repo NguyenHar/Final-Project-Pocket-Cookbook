@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pocket_Cookbook_Backend.Models;
 
@@ -11,9 +12,11 @@ using Pocket_Cookbook_Backend.Models;
 namespace Pocket_Cookbook_Backend.Migrations
 {
     [DbContext(typeof(CookbookContext))]
-    partial class CookbookContextModelSnapshot : ModelSnapshot
+    [Migration("20230623183440_user-favorites")]
+    partial class userfavorites
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

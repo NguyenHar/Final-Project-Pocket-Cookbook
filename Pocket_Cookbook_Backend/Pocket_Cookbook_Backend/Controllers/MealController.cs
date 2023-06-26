@@ -116,7 +116,6 @@ namespace Pocket_Cookbook_Backend.Controllers
                     }
                 }
                 return toReturn;
-                //return db.Results.Where(x => x.Meal.primary_key_id == foundQuery.mealFK).ToList();
             }
 
             // Entry doesn't exist, make api call and store in database

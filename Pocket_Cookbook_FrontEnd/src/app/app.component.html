@@ -1,8 +1,14 @@
 <div class="background center">
     <div class="topnav">
         <a class="active" routerLink="">Home Page</a>
-        <a routerLink="favorites">Favorites</a>
+        <a routerLink="favorites" *ngIf="loggedIn">Favorites</a>
         <a routerLink="shopping-list">Shopping List</a>
+        <a routerLink="login" *ngIf="loggedIn">User Info Page</a>
+
+        <div style="justify-content: left; margin-top: auto; margin-bottom: auto">
+            <asl-google-signin-button type='standard' size='large' *ngIf="!loggedIn"></asl-google-signin-button>
+            <button (click)="userLogout()" *ngIf="loggedIn">Sign Out</button>
+        </div>
     </div>
 
     <router-outlet></router-outlet>

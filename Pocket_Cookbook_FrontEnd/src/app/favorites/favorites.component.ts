@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MealService } from '../meal.service';
 import { Result } from '../meal';
 import { Router } from '@angular/router';
+import { UserFavoritesService } from '../user-favorites.service';
 
 @Component({
   selector: 'app-favorites',
@@ -11,11 +12,16 @@ import { Router } from '@angular/router';
 export class FavoritesComponent {
   favoritedMeals:Result[] = [];
 
-  constructor(private mealService:MealService, private router:Router) {
+  constructor(private mealService:MealService, private router:Router, private userService:UserFavoritesService) {
   }
   // Update the displayed list whenver the page is modified
   ngOnInit() {
-    this.favoritedMeals = this.mealService.mealSelectionData.favoritedMeals;
+    // this.favoritedMeals = this.mealService.mealSelectionData.favoritedMeals;
+    this.userService.getUserFavorites(this.userService.user.id).subscribe(
+      (result) => {
+        this.favoritedMeals = result;
+      }
+    );
   }
 
   // Stores the selected meal result in meal.service.ts as selectedMeal
@@ -26,6 +32,11 @@ export class FavoritesComponent {
 
   // Removes the favorited meal from meal.service.ts's favoritedMeals
   removeFavorite(index:number):void {
-    this.mealService.mealSelectionData.favoritedMeals.splice(index, 1);
+    this.userService.removeUserFavorite(this.userService.user.id, this.favoritedMeals[index].primary_key_id).subscribe(
+      () => {
+        this.favoritedMeals.splice(index, 1);
+      }
+    );
+
   }
 }

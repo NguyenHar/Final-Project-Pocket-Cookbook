@@ -14,13 +14,19 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-
+import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import { GoogleLoginProvider} from '@abacritt/angularx-social-login';
+import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
+import { GoogleLoginComponent } from './google-login/google-login.component';
 
 const routes : Route[] = [
   { path:'' , component:MealComponent, pathMatch: 'full' },
   { path:'favorites', component:FavoritesComponent},
   { path:'recipe', component:RecipeComponent},
-  { path:'shopping-list', component:ShoppingListComponent}
+  { path:'shopping-list', component:ShoppingListComponent},
+  { path:'login', component:GoogleLoginComponent},
+  { path:'home', component:MealComponent },
+
 ];
 
 @NgModule({
@@ -30,6 +36,7 @@ const routes : Route[] = [
     RecipeComponent,
     FavoritesComponent,
     ShoppingListComponent,
+    GoogleLoginComponent
   ],
   imports: [
     BrowserModule, 
@@ -41,8 +48,26 @@ const routes : Route[] = [
     MatToolbarModule,
     MatButtonModule,
     FlexLayoutModule,
+    SocialLoginModule,
+    GoogleSigninButtonModule
   ],
-  providers: [],
+  providers: [    {
+    provide: 'SocialAuthServiceConfig',
+    useValue: {
+      autoLogin: false,
+      providers: [
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider(
+            "48105807888-qatpml7icgecbbt9ap5jmud1vl27bqel.apps.googleusercontent.com"
+          )
+        }
+      ],
+      onError: (err) => {
+        console.error(err);
+      }
+    } as SocialAuthServiceConfig,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
