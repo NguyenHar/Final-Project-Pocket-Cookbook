@@ -22,7 +22,6 @@ export class AppComponent {
   }
   ngOnInit() {
     // Google login
-    console.log("test");
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.userService.user = user;
@@ -30,6 +29,7 @@ export class AppComponent {
       this.userService.loggedIn = (user != null);
       this.redirectTo("home");
     });
+    this.redirectTo("");
   }
 
   // Refreshes the page

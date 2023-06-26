@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { KrogerProduct } from './kroger';
+import { Datum, KrogerProduct } from './kroger';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -11,8 +11,8 @@ export class KrogerService {
   url:string="https://localhost:7270/api/Kroger/"
   searchResults:KrogerProduct[] = [];
   shoppingList:string[] = [];
-  productsToShop:KrogerProduct[] = [];
-  kp:KrogerProduct = {} as KrogerProduct;
+  productsToShop:Datum[][] = [];
+  // kp:KrogerProduct = {} as KrogerProduct;
   
   constructor(private http:HttpClient) { }
 
@@ -21,15 +21,14 @@ export class KrogerService {
     return this.http.get<KrogerProduct>(this.url + 'ProductSearch/' + query)
   }
 
-  getShoppingListKrogerItems(query:string):void{
-    this.getKrogerProducts(query).subscribe(
-      (result) => {
-        this.kp = result
-        this.productsToShop.push(this.kp);
-      }
-    )
+  // getShoppingListKrogerItems(query:string):void{
+  //   this.getKrogerProducts(query).subscribe(
+  //     (result) => {
+  //       this.productsToShop.push(result.data);
+  //     }
+  //   )
     
-  }
+  // }
 
 
   // Params: comma separated list of ingredients

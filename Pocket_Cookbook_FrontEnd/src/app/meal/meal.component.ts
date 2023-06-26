@@ -24,6 +24,7 @@ export class MealComponent {
 
   constructor (private mealService:MealService, private recipeService:RecipeService, 
     private router:Router, private authService: SocialAuthService, private userService:UserFavoritesService) {
+      
   }
   // Updates the list when anything on the page changes
   ngOnInit() {
