@@ -14,6 +14,7 @@ export class RecipeComponent {
   currentRecipe:Recipe = {} as Recipe;
   productsForIngredient:KrogerProduct[] = [];
   showCart:boolean = true
+  recipeWidget:string = "";
 
   constructor(private recipeService:RecipeService, private mealService:MealService, private krogerService:KrogerService) {
   }
@@ -62,7 +63,5 @@ export class RecipeComponent {
       }
     );
   }
-
-
 }
 
