@@ -2,52 +2,53 @@
 <div class="rowRecipe">
     <div class="columnRecipe">
         <img src="{{currentRecipe.image}}">    
-        <div *ngIf="currentRecipe.cookingMinutes != -1">
-            <p>Prep time: {{currentRecipe.preparationMinutes}}</p>
-            <p>Cook time: {{currentRecipe.cookingMinutes}}</p>
-        </div>
-        <div>
-            <p>Ready in: {{currentRecipe.readyInMinutes}} minutes!</p>
-        </div>
+        <p>Ready in: {{currentRecipe.readyInMinutes}} minutes!</p>
 
         <h2>Cooking Instructions</h2>
         <div class="text_box_list" *ngFor="let s of currentRecipe.analyzedInstructions[0].steps; let i = index">
             <p>Step{{i+1}}: {{s.step}}</p>
             <br/>
-        </div>       
+        </div>
     </div>
     
 
     <div class="columnRecipe">
-        <!-- Removes the button that toggles appeareance -->
-        <!-- <button *ngIf="!showIngredients" (click)="toggleIngredients(); currentRecipeSearch()">Show Ingredients</button>
-        <button *ngIf="showIngredients" (click)="toggleIngredients()">Hide Ingredients</button>
-        <div *ngIf="showIngredients"> -->
         <div>
             <h2>Ingredients</h2>
             <div class="text_box_list" *ngFor="let ingredient of currentRecipe.extendedIngredients; let i = index;">
-                <p>Recipe calls for: {{ingredient.original}}</p> 
-                <p>Whole ingredient: {{ingredient.nameClean}}</p>
-                <button (click)="addToShoppingList(ingredient.nameClean!); shoppingListKrogerSearch(ingredient.nameClean!)"
-                *ngIf="!checkShoppingList(ingredient.nameClean!)">Add➕to📃List</button>
-                <!-- <p *ngIf="productsForIngredient[i] != null">Available brand at Kroger: {{productsForIngredient[i].data[0].brand}}</p> -->
-
-                <!-- Loop that displays all 3 options -->
-                <!-- <div *ngIf="productsForIngredient[i].data[0].items[0].price.regular != 0; else elseBlock">
-                    <div *ngFor="let d of productsForIngredient[i].data; let j = index">
-                        <div *ngFor="let ing of d.items">
-                            <p>Brand: {{d.brand}} || Price:{{ing.price.regular}}</p>
-                        </div>
-                    </div> -->
-                    <!-- </div> -->
+                <div class="rowRecipe">
+                    <div class="columnRecipe" style="text-align: center; margin-top: auto; margin-bottom: auto;">
+                        <p>Recipe calls for: {{ingredient.original}}</p> 
+                        <p>Whole ingredient: {{ingredient.nameClean}}</p>
+                        <button (click)="addToShoppingList(ingredient.nameClean!); shoppingListKrogerSearch(ingredient.nameClean!)"
+                        *ngIf="!checkShoppingList(ingredient.nameClean!)">Add➕to📃List</button>
+                    </div>    
                     
-                <!-- <p *ngIf="productsForIngredient[i] != null">Kroger Price: {{productsForIngredient[i].data[0].items[0].price.regular}}</p>
-                <ng-template #elseBlock>Kroger price not found</ng-template> -->
+                    <div class="columnRecipe">
+                        <img style="object-fit: cover; width:350px; height:350px; background-color: white;" src="https://spoonacular.com/cdn/ingredients_500x500/{{ingredient.image}}">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-
-
-
+    <div class="columnRecipe">
+        <div>
+            <h2>Equipment</h2>
+            <div *ngFor="let a of currentRecipe.analyzedInstructions">
+                <div *ngFor="let b of a.steps">
+                    <div class="text_box_list" *ngFor="let equipment of b.equipment">
+                        <div class="rowRecipe">
+                            <div class="columnRecipe" style="text-align: center; margin-top: auto; margin-bottom: auto;">
+                                <p>{{equipment.name}}</p>
+                            </div>
+                            <div class="columnRecipe">
+                                <img style="object-fit: cover; width:350px; height:350px; background-color: white;" src="https://spoonacular.com/cdn/equipment_500x500/{{equipment.image}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
