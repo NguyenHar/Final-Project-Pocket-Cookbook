@@ -13,6 +13,7 @@ import { KrogerProduct } from '../kroger';
 export class RecipeComponent {
   currentRecipe:Recipe = {} as Recipe;
   productsForIngredient:KrogerProduct[] = [];
+  showCart:boolean = true
 
   constructor(private recipeService:RecipeService, private mealService:MealService, private krogerService:KrogerService) {
   }
@@ -23,6 +24,13 @@ export class RecipeComponent {
         this.getKrogerProductList();
       }
       );
+  }
+  addToShoppingList(s:string):void{
+    this.krogerService.shoppingList.push(s);
+  }
+
+  shoppingListKrogerSearch(query:string):void{
+    this.krogerService.getShoppingListKrogerItems(query);
   }
 
   // Creates a comma-separated string of ingredient names

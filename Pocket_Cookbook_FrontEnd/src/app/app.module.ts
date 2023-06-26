@@ -13,12 +13,14 @@ import { MatCardModule } from "@angular/material/card";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 
 
 const routes : Route[] = [
   { path:'' , component:MealComponent, pathMatch: 'full' },
   { path:'favorites', component:FavoritesComponent},
-  { path:'recipe', component:RecipeComponent}
+  { path:'recipe', component:RecipeComponent},
+  { path:'shopping-list', component:ShoppingListComponent}
 ];
 
 @NgModule({
@@ -27,6 +29,7 @@ const routes : Route[] = [
     MealComponent,
     RecipeComponent,
     FavoritesComponent,
+    ShoppingListComponent,
   ],
   imports: [
     BrowserModule, 

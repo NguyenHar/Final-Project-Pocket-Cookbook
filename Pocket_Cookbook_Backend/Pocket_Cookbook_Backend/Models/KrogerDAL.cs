@@ -73,7 +73,7 @@ namespace Pocket_Cookbook_Backend.Models
         {
             List<TokenStorage> storages = db.tokenstorage.ToList();
             TokenStorage storage = db.tokenstorage.FirstOrDefault(x => true);
-            if (storage == null || (DateTime.Now - storage.dateTime).TotalSeconds > 1799)
+            if (storage == null || (DateTime.Now - storage.dateTime).TotalSeconds > 1700 )
             {
                 if (storage != null)
                 {
