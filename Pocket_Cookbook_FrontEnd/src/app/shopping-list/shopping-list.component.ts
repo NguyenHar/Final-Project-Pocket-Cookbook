@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Data, Router } from '@angular/router';
 import { RecipeService } from '../recipe.service';
 import { KrogerService } from '../kroger.service';
-import { KrogerProduct } from '../kroger';
+import { Datum, KrogerProduct } from '../kroger';
 
 
 @Component({
@@ -11,12 +11,18 @@ import { KrogerProduct } from '../kroger';
   styleUrls: ['./shopping-list.component.css']
 })
 export class ShoppingListComponent {
-  currentShoppingList:string[]= this.krogerService.shoppingList;
-  krogerSearchResults:KrogerProduct[] = this.krogerService.productsToShop;
+  currentShoppingList:string[]= [];
+  krogerSearchResults:Datum[][] = [];
 
 
-  constructor(private recipeService:RecipeService, private krogerService:KrogerService, private router:Router) {
+  constructor(private recipeService:RecipeService, private krogerService:KrogerService, 
+    private router:Router) {
 
+  }
+
+  ngOnInit(){
+    this.currentShoppingList = this.krogerService.shoppingList;
+    this.krogerSearchResults = this.krogerService.productsToShop;
   }
 
   clearShoppingList():void{
@@ -25,6 +31,9 @@ export class ShoppingListComponent {
   }
 
 
+  goToRecipe():void{
+    this.router.navigate(["recipe"]);
+  }
 
 
 }

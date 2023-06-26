@@ -29,8 +29,16 @@ export class RecipeComponent {
     this.krogerService.shoppingList.push(s);
   }
 
+  checkShoppingList(s:string):boolean{
+    return this.krogerService.shoppingList.includes(s);
+  }
+
   shoppingListKrogerSearch(query:string):void{
-    this.krogerService.getShoppingListKrogerItems(query);
+    this.krogerService.getKrogerProducts(query).subscribe(
+      (result) => {
+        this.krogerService.productsToShop.push(result.data);
+      }
+    )
   }
 
   // Creates a comma-separated string of ingredient names
@@ -54,5 +62,7 @@ export class RecipeComponent {
       }
     );
   }
+
+
 }
 

@@ -28,7 +28,8 @@
             <div class="text_box_list" *ngFor="let ingredient of currentRecipe.extendedIngredients; let i = index;">
                 <p>Recipe calls for: {{ingredient.original}}</p> 
                 <p>Whole ingredient: {{ingredient.nameClean}}</p>
-                <button (click)="addToShoppingList(ingredient.nameClean!); shoppingListKrogerSearch(ingredient.nameClean!)">Add➕to📃List</button>
+                <button (click)="addToShoppingList(ingredient.nameClean!); shoppingListKrogerSearch(ingredient.nameClean!)"
+                *ngIf="!checkShoppingList(ingredient.nameClean!)">Add➕to📃List</button>
                 <!-- <p *ngIf="productsForIngredient[i] != null">Available brand at Kroger: {{productsForIngredient[i].data[0].brand}}</p> -->
 
                 <!-- Loop that displays all 3 options -->

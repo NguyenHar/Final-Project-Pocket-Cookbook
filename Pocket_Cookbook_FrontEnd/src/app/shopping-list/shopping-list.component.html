@@ -5,7 +5,21 @@
   <div class="table-horizontal-container">
     <table class="unfixed-table">
       <tbody>
-        <tr *ngFor="let c of currentShoppingList"><th>{{c}}</th><span *ngFor="let k of krogerSearchResults"><td *ngFor="let d of k.data">{{d.brand}}</td></span><td>Column three</td><td>Column four</td><td>Column firve</td><td>Column six</td><td>Column seven</td><td>Column eight</td></tr>
+        <tr *ngFor="let c of currentShoppingList; let i=index">
+          <th>{{c}}</th>
+          <span *ngFor="let data of krogerSearchResults[i]; let j=index">
+            <!-- <td *ngFor="let d of data; let k=index">
+              {{d.brand}}
+            </td> -->
+            <td>{{data.brand}}</td>
+          </span>
+          <!-- <td>Column three</td>
+          <td>Column four</td>
+          <td>Column firve</td>
+          <td>Column six</td>
+          <td>Column seven</td>
+          <td>Column eight</td> -->
+        </tr>
       </tbody>
     </table>
   </div>
@@ -14,8 +28,7 @@
 </article> -->
 
 
-
-
+<button (click)="goToRecipe()">Return to recipe</button>
 
 
 
