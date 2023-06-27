@@ -8,7 +8,7 @@ import { SocialUser } from '@abacritt/angularx-social-login';
   providedIn: 'root'
 })
 export class UserFavoritesService {
-  baseURL:string = "https://localhost:7270/api/UserFavorites/";
+  baseURL:string = "https://pocketcookbookwebsite.azurewebsites.net/api/UserFavorites/";
   // Status if a user is logged in
   loggedIn: boolean = false;
   // The person currently logged in

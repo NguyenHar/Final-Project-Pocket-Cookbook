@@ -7,7 +7,7 @@ import { Recipe } from './recipe';
   providedIn: 'root'
 })
 export class RecipeService {
-  baseURL:string = "https://localhost:7270/api/Recipe/";  
+  baseURL:string = "https://pocketcookbookwebsite.azurewebsites.net/api/Recipe/";  
   constructor(private http:HttpClient) { 
 
   }
