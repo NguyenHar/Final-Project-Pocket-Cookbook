@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class KrogerService {
 
-  url:string="https://localhost:7270/api/Kroger/"
+  url:string="https://pocketcookbookwebsite.azurewebsites.net/api/Kroger/"
   searchResults:KrogerProduct[] = [];
   shoppingList:string[] = [];
   productsToShop:Datum[][] = [];

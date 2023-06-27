@@ -10,7 +10,7 @@ import { SocialUser } from '@abacritt/angularx-social-login';
 export class MealService {
   // Object that encapsulates all of the input information necessary
   mealSelectionData:MealSelection = {} as MealSelection;
-  url:string = "https://localhost:7270/api/Meal/";
+  url:string = "https://pocketcookbookwebsite.azurewebsites.net/api/Meal/";
 
   constructor(private http:HttpClient) { 
     this.mealSelectionData.time = 30;
