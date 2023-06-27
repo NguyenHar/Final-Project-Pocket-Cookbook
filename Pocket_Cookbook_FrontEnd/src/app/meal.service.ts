@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Meal, MealSelection, Result } from './meal';
 import { HttpClient } from '@angular/common/http';
 import { SocialUser } from '@abacritt/angularx-social-login';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { SocialUser } from '@abacritt/angularx-social-login';
 export class MealService {
   // Object that encapsulates all of the input information necessary
   mealSelectionData:MealSelection = {} as MealSelection;
-  url:string = "https://pocketcookbookwebsite.azurewebsites.net/api/Meal/";
+  // url:string = "https://pocketcookbookwebsite.azurewebsites.net/api/Meal/";
 
   constructor(private http:HttpClient) { 
     this.mealSelectionData.time = 30;
@@ -36,20 +37,20 @@ export class MealService {
   // If doesn't exist in database, make a spoonacular api call and store it in the database
   // Returns: list of results matching the query and time restraints
   returnResultsByMeal(query:string, time:number):Observable<Result[]>{
-    return this.http.get<Result[]>(this.url + 'ReturnResultsbyMealQuery?query=query%3D' + query + '%26maxReadyTime%3D' + time);
+    return this.http.get<Result[]>(environment.apiUrl.toString() + '/api/Meal/"ReturnResultsbyMealQuery?query=query%3D' + query + '%26maxReadyTime%3D' + time);
   }
 
   // Checks database to see if this request already exists in database, if true return those results
   // If doesn't exist in database, make a spoonacular api call and store it in the database
     // Returns: list of results matching the cuisine and time restraints
   returnResultsByCuisine(query:string, time:number):Observable<Result[]>{
-    return this.http.get<Result[]>(this.url + 'ReturnResultsbyMealQuery?query=cuisine%3D' + query + '%26maxReadyTime%3D' + time);
+    return this.http.get<Result[]>(environment.apiUrl.toString() + '/api/Meal/"ReturnResultsbyMealQuery?query=cuisine%3D' + query + '%26maxReadyTime%3D' + time);
   }
 
   // Checks the database and finds the meal's total result number based on result PK id'
   // Returns: quantity of search results for that meal
   getResultCount(id:number):Observable<number>{
-    return this.http.get<number>(this.url + 'GetResultCount?resultId=' + id);
+    return this.http.get<number>(environment.apiUrl.toString() + '/api/Meal/"GetResultCount?resultId=' + id);
   }
 
 }
