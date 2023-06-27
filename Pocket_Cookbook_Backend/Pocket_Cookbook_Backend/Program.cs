@@ -24,12 +24,13 @@ namespace Pocket_Cookbook_Backend
                 options.AddPolicy("AllowAngularOrigins",
                 builder =>
                 {
-                    builder.WithOrigins(
-                                        "http://localhost:4200",
-                                        "https://white-forest-02d8f280f.3.azurestaticapps.net"
-                                        )
-                                        .AllowAnyHeader()
-                                        .AllowAnyMethod();
+                    //builder.WithOrigins(
+                    //                    "http://localhost:4200",
+                    //                    "https://white-forest-02d8f280f.3.azurestaticapps.net"
+                    //                    )
+                    //                    .AllowAnyHeader()
+                    //                    .AllowAnyMethod();
+                    builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
                 });
             });
 
@@ -37,7 +38,6 @@ namespace Pocket_Cookbook_Backend
 
 
             var app = builder.Build();
-            app.UseCors("AllowAngularOrigins");
             //var cors = require('cors');
             //app.use(cors());
 
@@ -49,6 +49,8 @@ namespace Pocket_Cookbook_Backend
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("AllowAngularOrigins");
 
             app.UseAuthorization();
 
