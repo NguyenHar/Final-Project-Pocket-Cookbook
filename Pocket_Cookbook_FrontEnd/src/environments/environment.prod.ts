@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://webpocketcookbook.azurewebsites.net'
+    apiUrl: 'https://pocketcookbookwebsite.azurewebsites.net'
   };

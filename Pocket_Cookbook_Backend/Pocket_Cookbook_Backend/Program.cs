@@ -25,8 +25,7 @@ namespace Pocket_Cookbook_Backend
                 builder =>
                 {
                     builder.WithOrigins(
-                                        "http://localhost:4200",
-                                        "https://white-forest-02d8f280f.3.azurestaticapps.net"
+                                        "http://localhost:4200"
                                         )
                                         .AllowAnyHeader()
                                         .AllowAnyMethod();
