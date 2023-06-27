@@ -37,7 +37,8 @@ namespace Pocket_Cookbook_Backend.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=Cookbook;Trusted_Connection=True;TrustServerCertificate=True");
+                //optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=Cookbook;Trusted_Connection=True;TrustServerCertificate=True");
+                optionsBuilder.UseSqlServer($"Server={secret.serverURL};Initial Catalog=Cookbook; User Id={secret.sqlUser}; Password={secret.sqlPass}");
             }
         }
     }
