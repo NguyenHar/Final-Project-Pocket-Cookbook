@@ -38,10 +38,12 @@ export class ShoppingListComponent {
 
   addToCart():void{ 
     let shoppingCart:Datum[] = [];
-    for (let i = 0; i < 2; i++)
+    for (let i = 0; i < this.krogerSearchResults.length; i++)
     {
       this.krogerSearchResults[i].forEach((kProduct:Datum) => {
         let item:HTMLInputElement = document.getElementById(kProduct.productId) as HTMLInputElement;
+        console.log(item);
+        console.log(item.checked);
         if(item.checked)
         {
           shoppingCart.push(kProduct);
