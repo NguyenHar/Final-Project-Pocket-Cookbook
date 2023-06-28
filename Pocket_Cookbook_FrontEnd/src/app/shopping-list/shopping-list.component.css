@@ -66,6 +66,7 @@ tr > :first-child {
   box-shadow: inset 0px 1px black;
 }
 
+
 .img {
   overflow:scroll !important;
   white-space: nowrap;
@@ -76,6 +77,17 @@ tr > :first-child {
   width: 100%;
 } */
 
+.mapContainer{
+  position: relative;
+}
 
 
+.columnMap {
+  flex: 40%;
+}
+
+.rowMap {
+  display: flex;
+  flex-wrap: wrap;
+}
 

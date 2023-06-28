@@ -37,20 +37,20 @@ export class MealService {
   // If doesn't exist in database, make a spoonacular api call and store it in the database
   // Returns: list of results matching the query and time restraints
   returnResultsByMeal(query:string, time:number):Observable<Result[]>{
-    return this.http.get<Result[]>(environment.apiUrl.toString() + '/api/Meal/ReturnResultsbyMealQuery?query=query%3D' + query + '%26maxReadyTime%3D' + time);
+    return this.http.get<Result[]>(environment.apiUrl + '/api/Meal/ReturnResultsbyMealQuery?query=query%3D' + query + '%26maxReadyTime%3D' + time);
   }
 
   // Checks database to see if this request already exists in database, if true return those results
   // If doesn't exist in database, make a spoonacular api call and store it in the database
     // Returns: list of results matching the cuisine and time restraints
   returnResultsByCuisine(query:string, time:number):Observable<Result[]>{
-    return this.http.get<Result[]>(environment.apiUrl.toString() + '/api/Meal/ReturnResultsbyMealQuery?query=cuisine%3D' + query + '%26maxReadyTime%3D' + time);
+    return this.http.get<Result[]>(environment.apiUrl + '/api/Meal/ReturnResultsbyMealQuery?query=cuisine%3D' + query + '%26maxReadyTime%3D' + time);
   }
 
   // Checks the database and finds the meal's total result number based on result PK id'
   // Returns: quantity of search results for that meal
   getResultCount(id:number):Observable<number>{
-    return this.http.get<number>(environment.apiUrl.toString() + '/api/Meal/GetResultCount?resultId=' + id);
+    return this.http.get<number>(environment.apiUrl + '/api/Meal/GetResultCount?resultId=' + id);
   }
 
 }

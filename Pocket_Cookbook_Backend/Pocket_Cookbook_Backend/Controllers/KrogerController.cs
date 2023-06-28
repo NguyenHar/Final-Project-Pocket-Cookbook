@@ -48,6 +48,15 @@ namespace Pocket_Cookbook_Backend.Controllers
             return await Task.WhenAll<KrogerProduct>(listOfTasks);
         }
 
+        // Get kroger location near lat & long coordinates
+        [HttpGet("GetKrogerLocations")]
+        public async Task<ActionResult<KrogerLocation>> GetKrogerLocation(decimal Lat, decimal Long)
+        {
+            string token = api.validateToken(db);
+            KrogerLocation location = api.GetKrogerLocation(token, Lat, Long);
+            return location;
+        }
+
         [HttpGet("DontUseThis")]
         public Task<KrogerProduct> DoKrogerAsync(string item)
         {
@@ -86,6 +95,7 @@ namespace Pocket_Cookbook_Backend.Controllers
 
             return CreatedAtAction("GetRecipe", new { id = recipe.primary_key_id }, recipe);
         }
+
 
     }
 

@@ -18,14 +18,14 @@ export class UserFavoritesService {
 
   // Searches the database and return as list of results that the user favorited
   getUserFavorites(userId:string):Observable<Result[]>{
-    return this.http.get<Result[]>(environment.apiUrl.toString() + "/api/UserFavorites/GetUserFavorites?userid=" + userId);
+    return this.http.get<Result[]>(environment.apiUrl + "/api/UserFavorites/GetUserFavorites?userid=" + userId);
   }
   // Adds favorited result from the user to the database
   addUserFavorite(userId:string, resultPKId:number):Observable<any>{
-    return this.http.post<any>(environment.apiUrl.toString() + "/api/UserFavorites/AddUserFavorite?userid=" + userId + "&resultPKId=" + resultPKId, {});
+    return this.http.post<any>(environment.apiUrl + "/api/UserFavorites/AddUserFavorite?userid=" + userId + "&resultPKId=" + resultPKId, {});
   }
   // Removes favorited result of the user from the database
   removeUserFavorite(userId:string, resultPKId:number):Observable<any>{
-    return this.http.delete<any>(environment.apiUrl.toString() + "/api/UserFavorites/RemoveUserFavorite?userid=" + userId + "&resultPKId=" + resultPKId);
+    return this.http.delete<any>(environment.apiUrl+ "/api/UserFavorites/RemoveUserFavorite?userid=" + userId + "&resultPKId=" + resultPKId);
   }
 }

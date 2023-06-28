@@ -37,3 +37,81 @@
 <button (click)="addToCart()">Add to cart</button>
 
 <h4 *ngIf="cartTotal != 0;">These items will cost: ${{cartTotal}}</h4>
+
+<!-- <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
+  <div *ngFor="let data of krogerSearchResults; let j=index">
+    <label *ng>
+      <input type="checkbox" [value]="data[j].price.regular" (change)="onCheckboxChange($event)" />
+      {{data}}
+    </label>
+  </div>
+  <input type="submit" value="Submit">
+</form> -->
+
+
+<!-- <table>
+    <tr *ngFor="let c of currentShoppingList">
+      <th>{{c}}</th>
+    </tr>
+    <tr *ngFor="let k of krogerSearchResults">
+    <div *ngFor="let d of k.data">
+      <td>{{d.brand}}</td>
+      <td *ngFor="let i of d.items">{{i.price.regular}}</td>
+    </div>
+    </tr>
+  </table>
+
+<button (click)="clearShoppingList()">Clear Shopping List</button> -->
+<!-- <div *ngFor="let c of currentShoppingList">
+    <p>{{c}}</p>
+</div> -->
+
+<!-- <div *ngFor="let k of krogerSearchResults">
+    <div *ngFor="let d of k.data">
+        <p>{{d.brand}}</p>
+        <div *ngFor="let i of d.items">
+            <p>{{i.price.regular}}</p>
+
+        </div>>
+
+    </div>
+</div> -->
+
+<div class="rowMap" style="text-align: center;">
+  <div>
+  </div>
+  <div class="columnMap" style="text-align:left; margin-left: 10%;">
+    <h2>Starting location: Holmes Hall</h2>
+    <h2>919 E Shaw Ln, East Lansing, MI 48825</h2>
+    <google-map 
+      height="750px" 
+      width="1000px" 
+      [center]="center"
+      [zoom]="zoom"
+      [options]="mapOptions"
+    >
+
+      <map-marker
+        *ngFor="let marker of markers"
+        [position]="marker.position"
+        [label]="marker.label"
+        [title]="marker.title"
+      ></map-marker>
+    </google-map>
+    
+  </div>
+  <div class="columnMap" style="margin-right: 10%;">
+    <div>
+      <h3>Nearby Kroger Locations:</h3>
+        <div *ngFor="let l of KrogerLocations.data; let i = index">
+          <ul>
+            <li style="margin-left:20%; text-align: left;">
+              <p>Location name: {{l.name}}</p>
+              <p>Address: {{l.address.addressLine1}}</p>
+              <p>Phone: {{l.phone}}</p>
+            </li>
+          </ul>
+        </div>
+    </div>
+  </div>
+</div>
