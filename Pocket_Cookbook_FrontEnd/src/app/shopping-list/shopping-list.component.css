@@ -1,13 +1,16 @@
 /* default styling. Nothing to do with freexing first row and column */
 main {display: flex;}
 main > * {border: 1px solid;}
-table {border-collapse: collapse; font-family: helvetica}
+table {border-collapse: collapse; font-family: helvetica;}
 td, th {border:  1px solid;
       padding: 10px;
       min-width: 200px;
       background: white;
       box-sizing: border-box;
       text-align: center;
+}
+tr {
+  min-width: 600px;
 }
 .table-container {
   position: relative;
@@ -47,7 +50,7 @@ tfoot td:first-child {
 }
 
 tbody {
-  overflow: scroll;
+  overflow:scroll;
   height: 200px;
 }
 
@@ -63,9 +66,21 @@ tr > :first-child {
   box-shadow: inset 0px 1px black;
 }
 
+
+.img {
+  overflow:scroll !important;
+  white-space: nowrap;
+}
+/* 
+.flowPlease {
+  height: 100%;
+  width: 100%;
+} */
+
 .mapContainer{
   position: relative;
 }
+
 
 .columnMap {
   flex: 40%;
