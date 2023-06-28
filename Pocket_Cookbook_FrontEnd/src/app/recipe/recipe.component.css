@@ -2,18 +2,19 @@
   border:1px solid #626161;
   color:#000000;
   font-size: 18px;
-  width:46rem;
+  /* width:46rem; */
   position: center;
   text-align: left;
   padding-left: 10px;
   height: auto;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 5%;
+  margin-right: 5%;
+  flex: auto;
  }
 
 /* Create two equal columns that floats next to each other */
 .columnRecipe {
-    flex: 33%;
+    flex: 25%;
   }
   
 .rowRecipe {

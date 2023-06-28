@@ -14,7 +14,7 @@ tr {
 }
 .table-container {
   position: relative;
-  max-height:  300px;
+  max-height:  35rem;
   width: 100%;
   overflow: scroll;
 }
