@@ -56,12 +56,12 @@
 
 .radio-toolbar input[type="radio"]:checked + label {
   background-color:#bfb;
-  border-color: #4c4;
+  border-color: #444;
 }
 
-.radio-toolbar input[type="radio"]:focus + label {
-  border: 2px dashed #444;
-}
+/* .radio-toolbar input[type="radio"]:focus + label {
+  border: 2px solid #444;
+} */
 
 .radio-toolbar label:hover {
   background-color: #dfd;
