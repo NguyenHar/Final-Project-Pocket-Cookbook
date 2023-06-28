@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserFavoritesService } from './user-favorites.service';
 import { MealService } from './meal.service';
+import { KrogerService } from './kroger.service';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class AppComponent {
 
 
   constructor(private router: Router, private authService:SocialAuthService, 
-    private userService:UserFavoritesService, private mealService:MealService) {
+    private userService:UserFavoritesService, private mealService:MealService, private krogerService:KrogerService) {
   }
   ngOnInit() {
     // Google login
@@ -47,5 +48,11 @@ export class AppComponent {
     this.loggedIn = false;
     this.userService.loggedIn = false;
     this.redirectTo("home");
+  }
+
+  checkShoppingList():boolean{
+    if (this.krogerService.shoppingList === undefined || this.krogerService.shoppingList.length == 0)
+      return false;
+    return true;
   }
 }

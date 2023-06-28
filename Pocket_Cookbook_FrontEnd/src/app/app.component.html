@@ -2,7 +2,7 @@
     <div class="topnav">
         <a class="active" routerLink="">Home Page</a>
         <a routerLink="favorites" *ngIf="loggedIn">Favorites</a>
-        <a routerLink="shopping-list">Shopping List</a>
+        <a routerLink="shopping-list" *ngIf="checkShoppingList()">Shopping List</a>
         <a routerLink="login" *ngIf="loggedIn">User Info Page</a>
 
         <div style="justify-content: left; margin-top: auto; margin-bottom: auto">
