@@ -33,47 +33,9 @@
 
 <button (click)="goToRecipe()">Return to recipe</button>
 <button (click)="addToCart()">Add to cart</button>
+<button (click)="cartTotal = 0">Clear Shopping Cart</button>
 
 <h4 *ngIf="cartTotal != 0;">These items will cost: ${{cartTotal}}</h4>
-
-<!-- <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
-  <div *ngFor="let data of krogerSearchResults; let j=index">
-    <label *ng>
-      <input type="checkbox" [value]="data[j].price.regular" (change)="onCheckboxChange($event)" />
-      {{data}}
-    </label>
-  </div>
-  <input type="submit" value="Submit">
-</form> -->
-
-
-<!-- <table>
-    <tr *ngFor="let c of currentShoppingList">
-      <th>{{c}}</th>
-    </tr>
-    <tr *ngFor="let k of krogerSearchResults">
-    <div *ngFor="let d of k.data">
-      <td>{{d.brand}}</td>
-      <td *ngFor="let i of d.items">{{i.price.regular}}</td>
-    </div>
-    </tr>
-  </table>
-
-<button (click)="clearShoppingList()">Clear Shopping List</button> -->
-<!-- <div *ngFor="let c of currentShoppingList">
-    <p>{{c}}</p>
-</div> -->
-
-<!-- <div *ngFor="let k of krogerSearchResults">
-    <div *ngFor="let d of k.data">
-        <p>{{d.brand}}</p>
-        <div *ngFor="let i of d.items">
-            <p>{{i.price.regular}}</p>
-
-        </div>>
-
-    </div>
-</div> -->
 
 <div class="rowMap" style="text-align: center;">
   <div>
