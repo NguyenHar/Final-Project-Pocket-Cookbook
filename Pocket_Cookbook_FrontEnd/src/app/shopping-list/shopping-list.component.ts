@@ -13,16 +13,18 @@ import { Datum, KrogerProduct } from '../kroger';
 export class ShoppingListComponent {
   currentShoppingList:string[]= [];
   krogerSearchResults:Datum[][] = [];
+  itemForCart:KrogerProduct = {} as KrogerProduct;
+  cartTotal:number = 0;
 
 
   constructor(private recipeService:RecipeService, private krogerService:KrogerService, 
     private router:Router) {
-
   }
 
   ngOnInit(){
     this.currentShoppingList = this.krogerService.shoppingList;
     this.krogerSearchResults = this.krogerService.productsToShop;
+    console.log(this.krogerSearchResults)
   }
 
   clearShoppingList():void{
@@ -30,10 +32,24 @@ export class ShoppingListComponent {
     this.krogerService.shoppingList = emptyStringArray; 
   }
 
-
   goToRecipe():void{
     this.router.navigate(["recipe"]);
   }
 
+  addToCart():void{ 
+    let shoppingCart:Datum[] = [];
+    for (let i = 0; i < 2; i++)
+    {
+      this.krogerSearchResults[i].forEach((kProduct:Datum) => {
+        let item:HTMLInputElement = document.getElementById(kProduct.productId) as HTMLInputElement;
+        if(item.checked)
+        {
+          shoppingCart.push(kProduct);
+          this.cartTotal += kProduct.items[0].price.regular;
+        }
+        
+      });     
+    }
+  }
 
 }
