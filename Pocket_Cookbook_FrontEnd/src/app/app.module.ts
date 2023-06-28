@@ -18,6 +18,7 @@ import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-s
 import { GoogleLoginProvider} from '@abacritt/angularx-social-login';
 import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { GoogleLoginComponent } from './google-login/google-login.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 const routes : Route[] = [
   { path:'' , component:MealComponent, pathMatch: 'full' },
@@ -49,7 +50,8 @@ const routes : Route[] = [
     MatButtonModule,
     FlexLayoutModule,
     SocialLoginModule,
-    GoogleSigninButtonModule
+    GoogleSigninButtonModule,
+    GoogleMapsModule
   ],
   providers: [    {
     provide: 'SocialAuthServiceConfig',

@@ -1,9 +1,16 @@
+<div style="text-align: center;">
+  <img src="assets/welcome.png" style="width: 50%">
+</div>
+
+
+
 <!-- Navigation menu -->
 <div class="radio-toolbar">
   <input type="radio" id="meal" name="meal" value="meal" [(ngModel)]="mealSelectionData.selectedSearch">
   <label for="meal">Search By Meal</label>
   <input type="radio" id="cuisine" name="meal" value="cuisine" [(ngModel)]="mealSelectionData.selectedSearch">
   <label for="cuisine">Search By Cuisine</label>
+
 
 <!-- Selection radio buttons -->
 <div *ngIf="mealSelectionData.selectedSearch != null">
@@ -56,4 +63,3 @@
     </div>
   </div>
 </div>
-

@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using Azure.Core;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using NuGet.Protocol;
 using RestSharp;
 using System.IO;
@@ -41,6 +43,19 @@ namespace Pocket_Cookbook_Backend.Models
             return at;
 
         }
+
+
+        // Get kroger location near zip code
+        public KrogerLocation GetKrogerLocation(string token, decimal Lat, decimal Long)
+        {
+            RestClient client = new RestClient(baseUrl + $"locations?filter.latLong.near={Lat},{Long}&filter.limit=10");
+            RestRequest request = new RestRequest();
+            request.AddHeader("Authorization", $"Bearer {token}");
+            Task<KrogerLocation> response = client.GetAsync<KrogerLocation>(request);
+            KrogerLocation kl = response.Result;
+            return kl;
+        }
+
 
         //kroger product query
         public KrogerProduct GetProduct(string at, string query)
