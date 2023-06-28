@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { UserFavoritesService } from './user-favorites.service';
 import { MealService } from './meal.service';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
