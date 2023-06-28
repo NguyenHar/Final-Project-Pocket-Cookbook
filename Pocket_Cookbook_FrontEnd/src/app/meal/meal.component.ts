@@ -114,16 +114,6 @@ export class MealComponent {
       );
   }
 
-  // // Used to display the favorite button only if it's not already favorited
-  // checkFavorite(id:number):boolean{
-  //   for (let i=0; i<this.mealService.mealSelectionData.favoritedMeals.length; i++){
-  //     if (this.mealService.mealSelectionData.favoritedMeals[i].primary_key_id == id)
-  //       return true;
-  //   }
-  //   return false;
-  // }
-
-
   // Used to display the favorite button only if it's not already favorited
   checkFavorite(id:number):boolean{
     for (let i=0; i<this.mealSelectionData.favoritedMeals.length; i++){

@@ -30,17 +30,20 @@
   </div>
 </div>
 
-
-<button (click)="goToRecipe()">Return to recipe</button>
-<button (click)="addToCart()">Add to cart</button>
-<button (click)="cartTotal = 0">Clear Shopping Cart</button>
+<br/><br/>
+<span>
+  <button (click)="goToRecipe()" style="margin-right: 10px">Return to recipe</button>
+  <button (click)="addToCart()" style="margin:auto">Add to cart</button>
+  <button (click)="cartTotal = 0" style="margin-left:10px">Clear Shopping Cart</button>
+</span>
+<br/>
 
 <h4 *ngIf="cartTotal != 0;">These items will cost: ${{cartTotal}}</h4>
 
 <div class="rowMap" style="text-align: center;">
   <div>
   </div>
-  <div class="columnMap" style="text-align:left; margin-left: 10%;">
+  <div class="columnMap" style="text-align:left; margin-left: 10%; margin-bottom: 8%;">
     <h2>Starting location: Holmes Hall</h2>
     <h2>919 E Shaw Ln, East Lansing, MI 48825</h2>
     <google-map 
