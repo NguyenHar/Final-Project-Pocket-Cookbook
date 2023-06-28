@@ -19,7 +19,7 @@
                 <div class="rowRecipe">
                     <div class="columnRecipe" style="text-align: center; margin-top: auto; margin-bottom: auto;">
                         <p>Recipe calls for: {{ingredient.original}}</p> 
-                        <p>Whole ingredient: {{ingredient.nameClean}}</p>
+                        <!-- <p>Whole ingredient: {{ingredient.nameClean}}</p> -->
                         <button (click)="addToShoppingList(ingredient.nameClean!); shoppingListKrogerSearch(ingredient.nameClean!)"
                         *ngIf="!checkShoppingList(ingredient.nameClean!)">Add➕to📃List</button>
                     </div>    
@@ -40,7 +40,9 @@
                     <div class="text_box_list" *ngFor="let equipment of b.equipment">
                         <div class="rowRecipe">
                             <div class="columnRecipe" style="text-align: center; margin-top: auto; margin-bottom: auto;">
-                                <p>{{equipment.name}}</p>
+                                <p>Equipment name: {{equipment.name}}</p>
+                                <button (click)="addToShoppingList(equipment.name!); shoppingListKrogerSearch(equipment.name!)"
+                                *ngIf="!checkShoppingList(equipment.name!)">Add➕to📃List</button>
                             </div>
                             <div class="columnRecipe">
                                 <img style="object-fit: cover; width:350px; height:350px; background-color: white;" src="https://spoonacular.com/cdn/equipment_500x500/{{equipment.image}}">

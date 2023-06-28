@@ -13,9 +13,16 @@
 
 
 <!-- Selection radio buttons -->
-<div *ngIf="mealSelectionData.selectedSearch != null">
+<div *ngIf="mealSelectionData.selectedSearch == 'meal'">
   <p>Select a target ready time.</p>
   <select [(ngModel)]="mealSelectionData.time" (change)="getMealsByQuery()">
+    <option *ngFor="let t of timeOptions">{{t}}</option>
+  </select>
+</div>
+
+<div *ngIf="mealSelectionData.selectedSearch == 'cuisine'">
+  <p>Select a target ready time.</p>
+  <select [(ngModel)]="mealSelectionData.time" (change)="getMealsByCuisine()">
     <option *ngFor="let t of timeOptions">{{t}}</option>
   </select>
 </div>
