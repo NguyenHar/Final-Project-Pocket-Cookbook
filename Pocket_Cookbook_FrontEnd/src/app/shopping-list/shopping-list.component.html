@@ -61,3 +61,41 @@
     </div>
 </div> -->
 
+<div class="rowMap" style="text-align: center;">
+  <div>
+  </div>
+  <div class="columnMap" style="text-align:left; margin-left: 10%;">
+    <h2>Starting location: Holmes Hall</h2>
+    <h2>919 E Shaw Ln, East Lansing, MI 48825</h2>
+    <google-map 
+      height="750px" 
+      width="1000px" 
+      [center]="center"
+      [zoom]="zoom"
+      [options]="mapOptions"
+    >
+
+      <map-marker
+        *ngFor="let marker of markers"
+        [position]="marker.position"
+        [label]="marker.label"
+        [title]="marker.title"
+      ></map-marker>
+    </google-map>
+    
+  </div>
+  <div class="columnMap" style="margin-right: 10%;">
+    <div>
+      <h3>Nearby Kroger Locations:</h3>
+        <div *ngFor="let l of KrogerLocations.data; let i = index">
+          <ul>
+            <li style="margin-left:20%; text-align: left;">
+              <p>Location name: {{l.name}}</p>
+              <p>Address: {{l.address.addressLine1}}</p>
+              <p>Phone: {{l.phone}}</p>
+            </li>
+          </ul>
+        </div>
+    </div>
+  </div>
+</div>

@@ -65,3 +65,15 @@ tr > :first-child {
 
 
 
+.mapContainer{
+  position: relative;
+}
+
+.columnMap {
+  flex: 40%;
+}
+
+.rowMap {
+  display: flex;
+  flex-wrap: wrap;
+}

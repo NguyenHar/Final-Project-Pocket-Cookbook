@@ -40,7 +40,8 @@
 }
 
 html {
-  background: linear-gradient(to right, #40d06b, #80b614);
+  /* background: linear-gradient(to right, #40d06b, #80b614); */
+  background: linear-gradient(to right, #7CD858, #0198B2);
 }
 
 /* body {
