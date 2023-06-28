@@ -32,7 +32,7 @@
         </div>
     </div>
 
-    <div class="columnRecipe">
+    <div class="columnRecipe" *ngIf="currentRecipe.analyzedInstructions[0].steps[0].equipment.length != 0">
         <div>
             <h2>Equipment</h2>
             <div *ngFor="let a of currentRecipe.analyzedInstructions">
