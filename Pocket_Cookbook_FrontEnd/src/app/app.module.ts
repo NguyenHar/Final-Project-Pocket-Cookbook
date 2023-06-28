@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { MealComponent } from './meal/meal.component';
 import { Route, RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule} from '@angular/forms';
 import { RecipeComponent } from './recipe/recipe.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

@@ -15,6 +15,8 @@ import { MapMarker } from '@angular/google-maps';
 export class ShoppingListComponent implements OnInit{
   currentShoppingList:string[]= [];
   krogerSearchResults:Datum[][] = [];
+  itemForCart:KrogerProduct = {} as KrogerProduct;
+  cartTotal:number = 0;
 
   KrogerLocations:KrogerLocation = {} as KrogerLocation;
   // Holmes Hall geolocations
@@ -66,6 +68,9 @@ export class ShoppingListComponent implements OnInit{
     newMarker.label = { color: 'black', text: `${location.name}` };
     newMarker.title = `${location.name}`;
     this.markers.push(newMarker);
+
+    this.krogerSearchResults = this.krogerService.productsToShop;
+    console.log(this.krogerSearchResults)
   }
 
   clearShoppingList():void{
@@ -73,8 +78,24 @@ export class ShoppingListComponent implements OnInit{
     this.krogerService.shoppingList = emptyStringArray; 
   }
 
-  // Page navigation
+
   goToRecipe():void{
     this.router.navigate(["recipe"]);
+  }
+
+  addToCart():void{ 
+    let shoppingCart:Datum[] = [];
+    for (let i = 0; i < 2; i++)
+    {
+      this.krogerSearchResults[i].forEach((kProduct:Datum) => {
+        let item:HTMLInputElement = document.getElementById(kProduct.productId) as HTMLInputElement;
+        if(item.checked)
+        {
+          shoppingCart.push(kProduct);
+          this.cartTotal += kProduct.items[0].price.regular;
+        }
+        
+      });     
+    }
   }
 }

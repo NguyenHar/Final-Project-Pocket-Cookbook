@@ -3,34 +3,45 @@
 
 <div class="table-container">
   <div class="table-horizontal-container">
+    <form>
     <table class="unfixed-table">
       <tbody>
-        <tr *ngFor="let c of currentShoppingList; let i=index">
+        <tr *ngFor="let c of currentShoppingList; let i=index" style="background-color: white; text-align: left;">
           <th>{{c}}</th>
           <span *ngFor="let data of krogerSearchResults[i]; let j=index">
-            <!-- <td *ngFor="let d of data; let k=index">
-              {{d.brand}}
-            </td> -->
-            <td>{{data.brand}}</td>
-          </span>
-          <!-- <td>Column three</td>
-          <td>Column four</td>
-          <td>Column firve</td>
-          <td>Column six</td>
-          <td>Column seven</td>
-          <td>Column eight</td> -->
-        </tr>
-      </tbody>
-    </table>
+                 <input type="checkbox" id="{{data.productId}}">
+                 <td>{{data.brand}}</td>
+                 <td *ngFor="let item of data.items">{{item.price.regular}}</td>
+                 <td>{{data.description}}</td>
+                 <span *ngFor="let image of data.images">
+                   <span *ngFor="let individual of image.sizes">
+                     <td *ngIf="individual.size == 'thumbnail' && image.perspective == 'front'"><img src="{{individual.url}}"></td>
+                    </span>
+                  </span>
+                  <br>
+                </span>
+              </tr>
+            </tbody>
+          </table>
+        </form>
   </div>
 </div>
-<!-- </object>
-</article> -->
 
 
 <button (click)="goToRecipe()">Return to recipe</button>
+<button (click)="addToCart()">Add to cart</button>
 
+<h4 *ngIf="cartTotal != 0;">These items will cost: ${{cartTotal}}</h4>
 
+<!-- <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
+  <div *ngFor="let data of krogerSearchResults; let j=index">
+    <label *ng>
+      <input type="checkbox" [value]="data[j].price.regular" (change)="onCheckboxChange($event)" />
+      {{data}}
+    </label>
+  </div>
+  <input type="submit" value="Submit">
+</form> -->
 
 
 <!-- <table>
@@ -99,3 +110,4 @@
     </div>
   </div>
 </div>
+
