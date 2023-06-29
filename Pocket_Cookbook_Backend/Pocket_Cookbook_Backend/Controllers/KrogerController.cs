@@ -18,12 +18,14 @@ namespace Pocket_Cookbook_Backend.Controllers
             this.db = db;
         }
 
-        [HttpGet("DummyQuery")]
+        //Generates a new Kroger token
+        [HttpGet("KrogerTokenGenerator")]
         public AccessToken getToken()
         {
             return api.GetProductToken();
         }
 
+        //searches kroger products based upon a query
         [HttpGet("ProductSearch/{query}")]
         public KrogerProduct GetKrogerProduct(string query)
         {
@@ -33,7 +35,7 @@ namespace Pocket_Cookbook_Backend.Controllers
             return product;
         }
 
-        
+        //searches for multiple Kroger products at once
         [HttpGet("GetMultipleProducts")]
         public async Task<ActionResult<IEnumerable<KrogerProduct>>> GetMultipleProducts(string list)
         {
