@@ -6,22 +6,27 @@
           <tbody>
             <tr *ngFor="let c of currentShoppingList; let i=index" style="background-color: white; text-align: left;">
               <th>{{c}}</th>
-            <span *ngFor="let data of krogerSearchResults[i]; let j=index">
-              <input type="checkbox" id="{{data.productId}}">
-              <span *ngFor="let image of data.images">
-                <span *ngFor="let individual of image.sizes">
-                  <td *ngIf="individual.size == 'thumbnail' && image.perspective == 'front'">
+              <span *ngFor="let data of krogerSearchResults[i]; let j=index" style="vertical-align: auto; margin-top: auto; margin-bottom: auto;">
+                <input type="checkbox" id="{{data.productId}}">
 
-                    <img src="{{individual.url}}">
+                  <td><img [src]="getThumbnail(data)"></td>
 
-                  </td>
-                </span>
+                <!-- <span *ngFor="let image of data.images">
+                  <span *ngFor="let individual of image.sizes">
+                    <td *ngIf="individual.size == 'thumbnail' && image.perspective == 'front'">
+
+                      <img src="{{individual.url}}">
+
+                    </td>
+                  </span>
+                </span> -->
+
+                  <td style="height:75px; width: 200px;">{{data.brand}}</td>
+                  <td *ngFor="let item of data.items" style="height:75px; width: 200px">{{item.price.regular}}</td>
+                  <td style="height:75px; width: 600px">{{data.description}}</td>
+
+                <br>
               </span>
-              <td>{{data.brand}}</td>
-              <td *ngFor="let item of data.items">{{item.price.regular}}</td>
-              <td>{{data.description}}</td>
-              <br>
-            </span>
             </tr>
           </tbody>
         </table>

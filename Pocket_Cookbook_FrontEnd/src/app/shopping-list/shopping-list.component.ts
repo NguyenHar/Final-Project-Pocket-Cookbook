@@ -100,4 +100,19 @@ export class ShoppingListComponent implements OnInit{
       });     
     }
   }
+
+  // Return thumbnail where perspective is front
+  getThumbnail(datum:Datum):string{
+    let str:string = "";
+
+    datum.images.forEach(function(image){
+      image.sizes.forEach(function(individual){
+        if (individual.size == 'thumbnail' && image.perspective == 'front')
+        {
+          str = individual.url;
+        }
+      })
+    })
+    return str;
+  }
 }
