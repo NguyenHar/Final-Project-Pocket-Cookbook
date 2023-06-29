@@ -17,7 +17,7 @@ namespace Pocket_Cookbook_Backend.Models
 
 
 
-
+        //kroger access token object
         public class AccessToken
         {
             public int expires_in { get; set; }
@@ -84,6 +84,8 @@ namespace Pocket_Cookbook_Backend.Models
             return kp;
         }
 
+        //checks to see if token in the database is still valid, if it is, uses that one. 
+        //If not retrieves a new token from kroger
         public string validateToken(CookbookContext db)
         {
             List<TokenStorage> storages = db.tokenstorage.ToList();
@@ -100,7 +102,7 @@ namespace Pocket_Cookbook_Backend.Models
                 ts.dateTime = DateTime.Now;
                 db.tokenstorage.Add(ts);
                 db.SaveChanges();
-                return ts.token;
+                return storage.token;
             }
             else
             {
