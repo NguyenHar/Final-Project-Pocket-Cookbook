@@ -41,15 +41,15 @@
   <button (click)="addToCart()" style="margin:auto">Add to cart</button>
   <button (click)="cartTotal = 0" style="margin-left:10px">Clear Shopping Cart</button>
 </span>
-<br/>
+<br/><br/><br/>
 
 <h4 *ngIf="cartTotal != 0;">These items will cost: ${{cartTotal}}</h4>
 
 <div class="rowMap" style="text-align: center;">
   <div>
   </div>
-  <div class="columnMap" style="text-align:left; margin-left: 10%; margin-bottom: 8%;">
-    <h2>Starting location: Holmes Hall</h2>
+  <div class="columnMap" style="text-align:left; margin-left: 5%; margin-bottom: 8%; margin-right: 0%;">
+    <h2>Selected Home Location: Holmes Hall at MSU (Go Green!)</h2>
     <h2>919 E Shaw Ln, East Lansing, MI 48825</h2>
     <google-map 
       height="750px" 
@@ -68,18 +68,19 @@
     </google-map>
     
   </div>
-  <div class="columnMap" style="margin-right: 10%;">
-    <div>
-      <h3>Nearby Kroger Locations:</h3>
-        <div *ngFor="let l of KrogerLocations.data; let i = index">
-          <ul>
-            <li style="margin-left:20%; text-align: left;">
-              <p>Location name: {{l.name}}</p>
-              <p>Address: {{l.address.addressLine1}}</p>
-              <p>Phone: {{l.phone}}</p>
-            </li>
-          </ul>
-        </div>
-    </div>
+  <div class="columnMap" style="text-align: left; padding-left: 30px;">
+    <section>
+      <br/><br/><br/><br/>
+      <h3>   Nearby Kroger Locations:</h3>
+      <div *ngFor="let l of KrogerLocations.data; let i = index">
+        <ul>
+          <li>
+            <p>Location name: {{l.name}}</p>
+            <p>Address: {{l.address.addressLine1}}</p>
+            <p>Phone: {{l.phone}}</p>
+          </li>
+        </ul>
+      </div>
+    </section>
   </div>
 </div>
