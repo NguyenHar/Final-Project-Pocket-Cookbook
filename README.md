@@ -5,6 +5,7 @@ Grand circus final project
 Backend (Pocket_Cookbook_Backend.sln)
 - Inside Models folder, create a class called secret.cs
 - Within this class, API keys and server information are stored as such:
+{
   public static class secret
   {
       public static string SpoonacularApiKey = ""; // From Spoonacular API
@@ -14,6 +15,7 @@ Backend (Pocket_Cookbook_Backend.sln)
       public static string sqlUser = "";
       public static string sqlPass = "";
   }
+}
 - Open nuget package manager console (tools -> nuget package manager -> package manager console)
 - run command "update-database user-favorites"
 
