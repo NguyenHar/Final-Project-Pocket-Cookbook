@@ -11,6 +11,7 @@ Backend (Pocket_Cookbook_Backend.sln)
       public static string SpoonacularApiKey = ""; // From Spoonacular API
       public static string Base64Key = ""; // From Kroger API
 
+      // Optional for sql server hosted on azure (see below)
       public static string serverURL = ""; // For sql server
       public static string sqlUser = "";
       public static string sqlPass = "";
